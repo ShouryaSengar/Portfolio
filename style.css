@@ -358,6 +358,10 @@ section .title::after{
     left: 0;
     background: crimson;
 }
+.skills .skills-content .right .line:hover::before{
+    color: #fff;
+    animation: pulsate_CV 10s ease-in-out;
+}
 .skills-content .right .c::before{
     width: 96%;
 }
