@@ -99,7 +99,7 @@ html{
 
 .home{
     display: flex;
-    background: url("./images/bg.png") no-repeat center;
+    background: url("./images/bgr.gif") no-repeat center;
     background-size: cover;
     background-attachment: fixed;
     height: 100vh;
