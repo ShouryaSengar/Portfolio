@@ -664,6 +664,7 @@ section .title::after {
 
 .contact .contact-content .left p {
     text-align: justify;
+    padding-top: 45px;
 }
 
 .contact .contact-content .left .icons {
