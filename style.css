@@ -422,9 +422,8 @@ section .title::after {
     margin-bottom: 10px;
 } */
 
-.skills .skills-content .left img {
-    height: 400px;
-    width: 400px;
+.skills .skills-content .left dotlottie-player {
+
     object-fit: fill;
     border-radius: 6px;
     display: block;
