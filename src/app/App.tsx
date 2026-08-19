@@ -32,7 +32,9 @@ const surfaces = [
 
 export function App() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
+    // Shell takes a CONTAINER width, never a prose measure. Gutter grows with
+    // the viewport instead of letting content stretch to fill it.
+    <main className="mx-auto max-w-content px-6 py-16 md:px-10 lg:px-16">
       <p className="text-ink-faint font-mono text-[length:var(--text-caption)] tracking-[0.18em] uppercase">
         Phase 2 — token specimen
       </p>
@@ -40,9 +42,11 @@ export function App() {
       {/* Display role: condensed width, heavy weight. */}
       <h1 className="text-ink mt-3 text-[length:var(--text-display)]">Ledger</h1>
 
-      <p className="text-ink-muted mt-4 max-w-[60ch]">
+      {/* Prose alone is measure-constrained — this is a legibility rule, not layout. */}
+      <p className="text-ink-muted mt-4 max-w-prose">
         Archivo Variable at two widths, IBM Plex Mono for data, and the greenbar palette.
-        Rules are functional: each one below marks a real boundary.
+        Rules are functional: each one below marks a real boundary. The shell is 1200px;
+        this paragraph is capped at 68 characters for reading comfort.
       </p>
 
       <hr className="mt-10" />
@@ -69,6 +73,8 @@ export function App() {
         <h2 id="surface-heading" className="text-ink text-[length:var(--text-xl)]">
           Surface ladder
         </h2>
+        {/* Uses the full container width — demonstrates that sections vary
+            deliberately rather than all sitting at one measure. */}
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {surfaces.map(({ token, label, use, cls }) => (
             <div

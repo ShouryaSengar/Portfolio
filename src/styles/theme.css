@@ -80,6 +80,24 @@
   --text-3xl: 2.4375rem; /* 39 */
   --text-display: clamp(3rem, 8vw, 5.5rem);
 
+  /* -------------------------------------------------------- containers ----
+     Tailwind v4 maps the --container-* namespace onto max-w-* utilities.
+
+     Layout width and reading measure are SEPARATE problems. The page shell is
+     wide (a ledger sheet is a broad ruled surface); only prose is constrained,
+     and it is constrained for legibility, not for layout.
+
+     Never apply a prose measure to a section shell.
+  ---------------------------------------------------------------------- */
+  --container-page: 90rem; /* 1440 — outer shell, caps stretch on 2560 displays */
+  --container-content: 75rem; /* 1200 — default section width */
+  --container-feature: 60rem; /*  960 — focused/single-column sections */
+
+  /* NO --container-prose here, deliberately. Tailwind v4's `max-w-prose` is a
+     hardcoded built-in (65ch) and is NOT derived from --container-*, so defining
+     one silently has no effect. 65ch sits inside our intended 65–70ch measure,
+     so use the built-in `max-w-prose` for paragraphs. */
+
   /* ----------------------------------------------------------- radius ----
      Paper has edges, not pillows. Small and restrained.
   ---------------------------------------------------------------------- */

@@ -130,6 +130,41 @@ the "broadsheet hairlines" default — a known adjacency, flagged deliberately.
 - Spacing base unit 4px. Section rhythm 96–160px. Component padding 12–20px.
 - Density: tighter than a marketing site, looser than a dashboard. Ledger-like.
 
+### Container widths
+
+**Layout width and reading measure are separate problems.** Conflating them — applying a
+prose measure to a whole page shell — is the most common way a wide-screen layout ends up
+looking like a phone screenshot stretched onto a desktop.
+
+| Token | Value | Use |
+|---|---|---|
+| `max-w-page` | 90rem / 1440px | outer shell; stops the layout stretching absurdly on 2560px displays |
+| `max-w-content` | 75rem / 1200px | default section width |
+| `max-w-feature` | 60rem / 960px | focused single-column sections |
+| `max-w-prose` | 65ch (Tailwind built-in) | **paragraphs only** |
+
+The first three come from `--container-*` tokens in `theme.css`. `max-w-prose` is the one
+exception to "every value lives in theme.css": Tailwind v4 hardcodes it at 65ch and does
+**not** derive it from `--container-*`, so declaring `--container-prose` has no effect at all.
+65ch is inside our intended 65–70ch measure, so the built-in is used as-is rather than
+shadowed by a near-duplicate token. Do not re-add `--container-prose` — it will look correct
+and do nothing.
+
+Rules for applying them:
+
+- A section shell gets `max-w-content` or `max-w-page`. **Never `max-w-prose`.**
+- `max-w-prose` goes on `<p>` and prose blocks, because ~68 characters is where reading
+  comfort sits. It is a typographic constraint, not a layout one.
+- Full-bleed rules are permitted and encouraged for major section breaks — a ruled sheet
+  reads better when the ruling reaches the edge. Content stays within the container while
+  the rule extends past it.
+- **Widths vary by section on purpose.** Per the spatial-rhythm rule in
+  `.kiro/skills/tailwind-design-system`, uniform width everywhere is the sound of nobody
+  deciding. The Work section wants width for its diagrams; a lead paragraph wants
+  constraint. Vary deliberately.
+- Horizontal padding: 24px mobile, 40px tablet, 64px desktop. The gutter grows with the
+  viewport rather than the content stretching to fill it.
+
 Numbered markers (`01`, `02`, `03`) **are** permitted on the Work section, because the three
 projects genuinely run oldest-to-newest with increasing architectural ownership. That is a
 real sequence carrying real information. They are not permitted anywhere else.
