@@ -2,51 +2,129 @@
 
 /*
   ============================================================================
-  PLACEHOLDER TOKENS — Phase 0 scaffold only.
+  DIRECTION A — LEDGER
+  Locked in .kiro/steering/design-system.md. Read that before changing a value.
 
-  These exist so the build can be verified. They are deliberately neutral and
-  deliberately NOT a design. The real token system is produced in Phase 2,
-  derived from the direction chosen in Phase 1.
-
-  Rules once real tokens land (see .kiro/skills/tailwind-design-system):
-    - Token names come from the subject's world, not a numeric scale
-    - Four text levels minimum
-    - One accent, one hue across surfaces, ~60/30/10 distribution
-    - One depth strategy, committed to
+  This file is the ONLY place raw visual values are defined. A hex code or an
+  arbitrary px value inside a component is a review failure.
   ============================================================================
 */
 
-@theme {
-  --color-canvas: #0b0c0e;
-  --color-surface: #121317;
-  --color-line: oklch(100% 0 0 / 0.08);
-  --color-ink: #f4f4f5;
-  --color-ink-muted: oklch(100% 0 0 / 0.62);
-  --color-ink-faint: oklch(100% 0 0 / 0.42);
-  --color-signal: #7bf1a8;
+/* ---------------------------------------------------------------- fonts ----
+   Vendored from @fontsource-variable/archivo@5.3.0 and
+   @fontsource/ibm-plex-mono@5.3.0 (devDependencies, for provenance).
+   Latin subset only — declared explicitly rather than importing Fontsource CSS
+   so the filenames stay stable and preloadable from index.html.
+--------------------------------------------------------------------------- */
 
+@font-face {
+  font-family: 'Archivo Variable';
+  font-style: normal;
+  font-display: swap;
+  /* Single file carries BOTH axes — this is what lets one family serve
+     display (condensed, heavy) and body (normal, regular). */
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url('/fonts/archivo-var-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/plex-mono-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  /* ---------------------------------------------------------- palette ----
+     Named from the domain: insurance/fintech paperwork.
+     One hue family across surfaces — lightness shifts only, never hue.
+     One accent (--color-stamp). --color-carbon is interactive state, not
+     decoration.
+  ---------------------------------------------------------------------- */
+  --color-ledger: #e6e9e3; /* canvas — pale greenbar stock */
+  --color-leaf: #f2f4ef; /* raised surface, cards */
+  --color-leaf-sunk: #dde1d9; /* inset surfaces, inputs — darker, not lighter */
+
+  --color-rule: color-mix(in oklab, #a8b5a8 45%, transparent);
+  --color-rule-strong: color-mix(in oklab, #a8b5a8 75%, transparent);
+
+  --color-ink: #14171a; /* primary — AAA on ledger */
+  --color-ink-muted: #4a5157; /* supporting — AA on ledger */
+  --color-ink-faint: #6e767c; /* metadata — large text only */
+
+  --color-stamp: #b4321e; /* THE accent */
+  --color-carbon: #2b3a67; /* links, focus */
+
+  /* ------------------------------------------------------------- type ----
+     Archivo at two widths + Plex Mono. Two families total.
+  ---------------------------------------------------------------------- */
+  --font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Ratio 1.25 from a 16px body. Rounded to whole pixels. */
+  --text-caption: 0.6875rem; /* 11 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-base: 1rem; /* 16 */
+  --text-lg: 1.25rem; /* 20 */
+  --text-xl: 1.5625rem; /* 25 */
+  --text-2xl: 1.9375rem; /* 31 */
+  --text-3xl: 2.4375rem; /* 39 */
+  --text-display: clamp(3rem, 8vw, 5.5rem);
+
+  /* ----------------------------------------------------------- radius ----
+     Paper has edges, not pillows. Small and restrained.
+  ---------------------------------------------------------------------- */
+  --radius-control: 3px;
+  --radius-card: 5px;
+  --radius-media: 6px;
+
+  /* ----------------------------------------------------------- motion ----
+     Custom ease-out. Built-in curves are too weak to read as crafted.
+  ---------------------------------------------------------------------- */
   --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-quint: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer base {
-  /* Quality floor from .kiro/skills/ui-polish — applies regardless of direction. */
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--color-canvas);
+    background-color: var(--color-ledger);
     color: var(--color-ink);
+    font-family: var(--font-body);
+    /* Body sits at normal width and regular weight — the display role uses the
+       same family at a condensed width. */
+    font-stretch: 100%;
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Headings take the condensed width and heavy weight — the "type set on a
+     form" move that this direction is built on. */
   h1,
   h2,
   h3,
   h4 {
+    font-family: var(--font-display);
+    font-stretch: 78%;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
@@ -54,10 +132,25 @@
     text-wrap: pretty;
   }
 
-  /* Never suppress focus without a replacement. */
+  /* Every dynamic number. Prevents the layout jitter that gives away an
+     unfinished interface. */
+  :where(time, data, .tabular) {
+    font-variant-numeric: tabular-nums;
+  }
+
+  a {
+    color: var(--color-carbon);
+  }
+
+  /* Never suppressed. Must be visible on ledger, leaf, and leaf-sunk. */
   :focus-visible {
-    outline: 2px solid var(--color-signal);
+    outline: 2px solid var(--color-stamp);
     outline-offset: 2px;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
   }
 
   @media (prefers-reduced-motion: reduce) {

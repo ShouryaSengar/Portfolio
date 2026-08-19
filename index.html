@@ -1,8 +1,21 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#E6E9E3" />
+
+    <!-- Preload the display face only. It renders the LCP text, so it must not
+         wait on CSS discovery. Plex Mono is below-the-fold detail and is left to
+         normal discovery. -->
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!--
       PLACEHOLDER METADATA — Phase 0 scaffold only.

@@ -217,7 +217,7 @@ Assets belong **in the repository**, not on external file hosts.
 
 | Asset | Destination | Treatment |
 |---|---|---|
-| Profile photo | `src/assets/` | Reusing existing `images/Creative DP.png` (confirmed). AVIF + WebP, 2 sizes, dimensions in markup. |
+| Profile photo | `src/assets/` | **Pending.** `images/Creative DP.png` has been deleted. Shourya is supplying a background-free portrait so it composites on any surface. AVIF + WebP, 2 sizes, dimensions in markup. |
 | Resume | `public/resume.pdf` | Latest version. No spaces in the deployed path. |
 | Store screenshots | `src/assets/projects/` | Downloaded and reprocessed to AVIF, not hotlinked. |
 | Diagrams | `src/assets/diagrams/` | Author as SVG — crisp, tiny, themeable via `currentColor`. |
@@ -225,11 +225,19 @@ Assets belong **in the repository**, not on external file hosts.
 `src/assets/` rather than `public/` for images so Vite content-hashes them and can emit
 responsive variants. The resume stays in `public/` because it needs a stable, shareable URL.
 
-**Profile photo caveat:** `images/Creative DP.png` is a stylised illustrated graphic, not a
-photograph. Shourya has confirmed reuse. Two consequences to design around: it will not
-composite like a headshot, and its existing background must be handled deliberately rather
-than dropped onto a section fill. If the chosen visual direction calls for a real headshot,
-raise it then rather than substituting silently.
+**Profile photo: awaiting asset.** The old stylised graphic (`images/Creative DP.png`) has
+been removed. Shourya will supply a real portrait with no background, so it sits on any
+surface without a plate behind it.
+
+Design around the fact that it is not here yet:
+
+- Build the section with a reserved, correctly-proportioned placeholder that has explicit
+  `width`/`height`. Dropping the image in later must not shift layout.
+- A cut-out portrait needs a deliberate relationship to the ledger canvas — it will read as
+  floating unless it is anchored by the ruling grid, a baseline, or an overlap with a
+  section edge. Decide that anchor when the asset arrives, not before.
+- Transparent PNG is large. Convert to AVIF with an alpha channel and check the file size
+  against the 150 kB per-image ceiling.
 
 Do not link assets from Google Drive, Dropbox, or similar. Those services rate-limit
 hotlinking, serve through redirects that break `<img>` loading, strip caching headers, send

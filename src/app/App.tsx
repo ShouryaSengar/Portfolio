@@ -1,32 +1,107 @@
-import { cn } from '@shared/lib/cn';
-
 /**
- * PHASE 0 SMOKE TEST ONLY.
+ * PHASE 2 TOKEN SPECIMEN — not final UI.
  *
- * This exists to prove the toolchain renders React, resolves path aliases, and
- * compiles Tailwind v4 tokens. It is not design work and carries no visual
- * direction — that comes from Phase 1.
+ * This renders the Direction A token system so it can be inspected in a browser:
+ * both Archivo width axes, the four ink levels, the surface ladder, the ruling
+ * grid, and the accent. It is a specimen sheet, not a design.
  *
- * Delete this body entirely when the real sections land.
+ * Sections replace this entirely from Phase 5. Delete the body then.
  */
+
+const inkLevels = [
+  { token: '--color-ink', label: 'ink', use: 'primary text', cls: 'text-ink' },
+  {
+    token: '--color-ink-muted',
+    label: 'ink-muted',
+    use: 'supporting copy',
+    cls: 'text-ink-muted',
+  },
+  {
+    token: '--color-ink-faint',
+    label: 'ink-faint',
+    use: 'metadata, large text only',
+    cls: 'text-ink-faint',
+  },
+] as const;
+
+const surfaces = [
+  { token: '--color-ledger', label: 'ledger', use: 'canvas', cls: 'bg-ledger' },
+  { token: '--color-leaf', label: 'leaf', use: 'raised', cls: 'bg-leaf' },
+  { token: '--color-leaf-sunk', label: 'leaf-sunk', use: 'inset', cls: 'bg-leaf-sunk' },
+] as const;
+
 export function App() {
   return (
-    <main className="grid min-h-dvh place-items-center px-6">
-      <div className="max-w-prose space-y-4 text-center">
-        <p className="text-ink-faint font-mono text-xs tracking-widest uppercase">
-          Phase 0 — toolchain verified
-        </p>
-        <h1 className="text-ink text-3xl font-semibold tracking-tight">
-          Scaffold is live
-        </h1>
-        <p className="text-ink-muted">
-          React 19, Vite 8, TypeScript strict, and Tailwind v4 are wired together. Design
-          direction and real content have not been built yet.
-        </p>
-        <p className={cn('text-signal font-mono text-sm')}>
-          tokens + path aliases + cn() resolving
-        </p>
-      </div>
+    <main className="mx-auto max-w-3xl px-6 py-16">
+      <p className="text-ink-faint font-mono text-[length:var(--text-caption)] tracking-[0.18em] uppercase">
+        Phase 2 — token specimen
+      </p>
+
+      {/* Display role: condensed width, heavy weight. */}
+      <h1 className="text-ink mt-3 text-[length:var(--text-display)]">Ledger</h1>
+
+      <p className="text-ink-muted mt-4 max-w-[60ch]">
+        Archivo Variable at two widths, IBM Plex Mono for data, and the greenbar palette.
+        Rules are functional: each one below marks a real boundary.
+      </p>
+
+      <hr className="mt-10" />
+
+      {/* Key/value alignment — the recurring layout motif. */}
+      <section className="mt-8" aria-labelledby="ink-heading">
+        <h2 id="ink-heading" className="text-ink text-[length:var(--text-xl)]">
+          Ink levels
+        </h2>
+        <dl className="mt-4">
+          {inkLevels.map(({ token, label, use, cls }) => (
+            <div
+              key={token}
+              className="border-rule flex items-baseline justify-between gap-4 border-b py-3"
+            >
+              <dt className={`${cls} font-mono text-[length:var(--text-sm)]`}>{label}</dt>
+              <dd className="text-ink-faint text-[length:var(--text-sm)]">{use}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="mt-10" aria-labelledby="surface-heading">
+        <h2 id="surface-heading" className="text-ink text-[length:var(--text-xl)]">
+          Surface ladder
+        </h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {surfaces.map(({ token, label, use, cls }) => (
+            <div
+              key={token}
+              className={`${cls} border-rule rounded-[var(--radius-card)] border p-4`}
+            >
+              <p className="text-ink font-mono text-[length:var(--text-sm)]">{label}</p>
+              <p className="text-ink-faint mt-1 text-[length:var(--text-caption)]">
+                {use}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10" aria-labelledby="accent-heading">
+        <h2 id="accent-heading" className="text-ink text-[length:var(--text-xl)]">
+          Accent and numerals
+        </h2>
+        <div className="border-rule mt-4 flex flex-wrap items-baseline gap-6 border-t pt-4">
+          <p className="text-stamp font-mono text-[length:var(--text-sm)]">stamp</p>
+          <a href="#accent-heading" className="text-[length:var(--text-sm)] underline">
+            carbon link
+          </a>
+          {/* tabular-nums applies via the `tabular` selector in theme.css */}
+          <p className="tabular text-ink text-[length:var(--text-2xl)] font-semibold">
+            100,000+
+          </p>
+          <p className="text-ink-faint text-[length:var(--text-caption)]">
+            daily active users
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
