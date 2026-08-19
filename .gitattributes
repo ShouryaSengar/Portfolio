@@ -1,2 +1,26 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalise line endings in the repository to LF.
+#
+# `text=auto` alone stores LF but checks out CRLF on Windows, which then conflicts
+# with Prettier's `endOfLine: "lf"` — every file reads as misformatted after a fresh
+# clone. Pinning `eol=lf` keeps the working copy LF on every platform so the
+# repository, Prettier, and CI all agree.
+* text=auto eol=lf
+
+# Binary assets — never touch these.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.mp4   binary
+*.webm  binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+
+# Generated — collapse in diffs and exclude from language stats.
+package-lock.json -diff linguist-generated
