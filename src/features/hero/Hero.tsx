@@ -4,6 +4,7 @@ import { ButtonLink } from '@shared/ui/Button';
 import { DataList, DataRow } from '@shared/ui/DataList';
 import { Eyebrow } from '@shared/ui/Eyebrow';
 import { Placeholder } from '@shared/ui/Placeholder';
+import { SchemaInspector } from '@shared/ui/SchemaInspector';
 import { Section } from '@shared/ui/Section';
 
 /**
@@ -59,6 +60,10 @@ export function Hero() {
               LinkedIn
             </ButtonLink>
           </div>
+
+          {/* The signature. This section renders from `profile`, so this shows the
+              genuine object rather than an illustration of one. */}
+          <SchemaInspector data={profile} sourcePath="src/content/profile.ts" />
         </div>
 
         {/* Fixed width so the record column keeps a sane measure rather than being

@@ -24,7 +24,8 @@
     "assets": "node scripts/verify-assets.mjs",
     "assets:strict": "node scripts/verify-assets.mjs --strict",
     "icons:verify": "node scripts/verify-icons.mjs",
-    "nav": "node scripts/verify-nav.mjs"
+    "nav": "node scripts/verify-nav.mjs",
+    "highlight:verify": "node scripts/verify-highlight.mjs"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
