@@ -176,3 +176,13 @@ export const projects = [
 
 /** Slug union derived from the data, so it cannot drift from it. */
 export type ProjectSlug = (typeof projects)[number]['slug'];
+
+/**
+ * A single entry, with its literal types intact.
+ *
+ * Consumers should prefer this over the wider `Project` interface from `./types`.
+ * `Project` declares `slug: string`, which loses the literal union and forces a cast
+ * at any call site that keys a lookup off the slug. This keeps the narrowing that
+ * `as const` bought.
+ */
+export type ProjectEntry = (typeof projects)[number];

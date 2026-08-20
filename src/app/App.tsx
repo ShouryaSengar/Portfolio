@@ -1,15 +1,12 @@
-import { projects } from '@content/projects';
 import { roles } from '@content/experience';
 import { alsoKnown, architecture, stack } from '@content/stack';
 import { Header } from '@features/header';
 import { Hero } from '@features/hero';
-import { ButtonLink } from '@shared/ui/Button';
-import { Card } from '@shared/ui/Card';
+import { Work } from '@features/work';
 import { DataList, DataRow } from '@shared/ui/DataList';
 import { Eyebrow } from '@shared/ui/Eyebrow';
 import { Rule } from '@shared/ui/Rule';
 import { Section } from '@shared/ui/Section';
-import { Tag } from '@shared/ui/Tag';
 import { TechIcon } from '@shared/ui/TechIcon';
 
 /**
@@ -35,87 +32,7 @@ export function App() {
 
         <Rule weight="strong" />
 
-        {/* ------------------------------------------------------------- work --- */}
-        <Section id="work" aria-labelledby="work-heading" rhythm="major">
-          <Eyebrow>Selected work</Eyebrow>
-          <h2 id="work-heading" className="mt-2 text-2xl">
-            Three applications in production
-          </h2>
-          <p className="text-ink-muted mt-3 max-w-prose text-sm">
-            Ordered oldest to newest, which is also the order of increasing architectural
-            ownership.
-          </p>
-
-          <div className="mt-8 space-y-6">
-            {projects.map((project, index) => (
-              <Card key={project.slug} padding="lg">
-                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  {/* Numbered because the sequence carries real information here —
-                    the only place design-system.md permits these markers. */}
-                  <Eyebrow tone="accent" tracking="tight">
-                    {String(index + 1).padStart(2, '0')}
-                  </Eyebrow>
-                  <h3 className="text-xl">{project.name}</h3>
-                  <p className="text-ink-faint text-caption">{project.client}</p>
-                </div>
-
-                <p className="text-ink-muted mt-2 text-sm">{project.tagline}</p>
-
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {project.platforms.map((platform) => (
-                    <li key={platform}>
-                      <Tag tone="outline">{platform}</Tag>
-                    </li>
-                  ))}
-                  {project.stack.map((tech) => (
-                    <li key={tech}>
-                      <Tag>{tech}</Tag>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  <div>
-                    <Eyebrow>Problem</Eyebrow>
-                    <p className="text-ink-muted mt-2 text-sm">{project.problem}</p>
-                  </div>
-                  <div>
-                    <Eyebrow>Approach</Eyebrow>
-                    <p className="text-ink-muted mt-2 text-sm">{project.approach}</p>
-                  </div>
-                </div>
-
-                <DataList className="mt-6">
-                  {project.contributions.flatMap((contribution) =>
-                    contribution.outcomes.map((outcome) => (
-                      <DataRow
-                        key={`${contribution.summary}-${outcome.label}`}
-                        label={outcome.label}
-                        value={outcome.value}
-                        numeric
-                      />
-                    )),
-                  )}
-                </DataList>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {project.links.map((link) => (
-                    <ButtonLink
-                      key={link.url}
-                      href={link.url}
-                      target="_blank"
-                      intent="secondary"
-                      size="sm"
-                    >
-                      {/* A gated link must say so, or it reads as broken. */}
-                      {link.gated ? `${link.label} (sign-in required)` : link.label}
-                    </ButtonLink>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Section>
+        <Work />
 
         <Rule />
 
