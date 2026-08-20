@@ -6,7 +6,6 @@ import { fadeOnly, fadeUp, heroStagger } from '@shared/motion';
 import { ButtonLink } from '@shared/ui/Button';
 import { DataList, DataRow } from '@shared/ui/DataList';
 import { Eyebrow } from '@shared/ui/Eyebrow';
-import { Placeholder } from '@shared/ui/Placeholder';
 import { SchemaInspector } from '@shared/ui/SchemaInspector';
 import { Section } from '@shared/ui/Section';
 
@@ -93,11 +92,18 @@ export function Hero() {
           variants={childVariants}
           transition={{ delay: 0.6 }}
         >
-          <Placeholder
-            label={portrait.label}
-            ratio={portrait.ratio}
-            note={portrait.note}
-          />
+          <div className="relative overflow-hidden rounded-card">
+            {/* Bottom accent strip */}
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-[#b4321e]" />
+            <img
+              src="/Profile.png"
+              alt={`Portrait of ${profile.name}`}
+              className="relative w-full object-cover"
+              style={{ aspectRatio: String(portrait.ratio) }}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </m.div>
       </div>
     </Section>

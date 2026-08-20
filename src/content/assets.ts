@@ -34,9 +34,10 @@ export const assets = [
   {
     id: 'portrait',
     label: 'Portrait',
-    status: 'placeholder',
+    status: 'final',
     ratio: 4 / 5,
-    note: 'Background-free portrait. Convert to AVIF with alpha, under 150 kB.',
+    src: '/Profile.png',
+    note: 'Background-free portrait on ledger canvas with accent strip.',
     owner: 'shourya',
   },
   {
