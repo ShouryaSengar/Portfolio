@@ -42,11 +42,10 @@ export const assets = [
   {
     id: 'resume',
     label: 'Resume PDF',
-    status: 'placeholder',
-    /* Not rendered as an image; ratio is unused but the shape is uniform. A4 is
-       roughly 1 / 1.414. */
+    status: 'final',
     ratio: 1 / 1.414,
-    note: 'Repo copy is an older revision. Replace at public/resume.pdf.',
+    src: '/resume.pdf',
+    note: 'Latest revision, served from public/resume.pdf.',
     owner: 'shourya',
   },
   {
