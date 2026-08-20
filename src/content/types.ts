@@ -151,14 +151,20 @@ export interface Role {
  * There is no proficiency field, by design. The old site rated skills as
  * percentages, which read as junior and could not be defended. `provenBy` names
  * project slugs instead: the proof is the link.
+ *
+ * Generic over the slug type so `stack.ts` can bind it to the real `ProjectSlug`
+ * union and have a mistyped slug fail compilation. Kept generic rather than
+ * importing the union directly, which would make types.ts depend on projects.ts
+ * and create a cycle. Defaults to `string` so the type is usable on its own.
  */
-export interface Capability {
+export interface Capability<TSlug extends string = string> {
   readonly name: string;
-  /** Project slugs where this was used in production. May be empty. */
-  readonly provenBy: readonly string[];
+  /** Project slugs where this shipped to production. Legitimately empty for
+      things not evidenced by the three case studies. */
+  readonly provenBy: readonly TSlug[];
 }
 
-export interface CapabilityGroup {
+export interface CapabilityGroup<TSlug extends string = string> {
   readonly label: string;
-  readonly items: readonly Capability[];
+  readonly items: readonly Capability<TSlug>[];
 }
