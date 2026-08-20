@@ -176,7 +176,7 @@
      section, since forgetting it on one section is invisible until someone uses the
      nav. The extra 1rem is breathing room, not alignment. */
   :where(section[id], footer[id]) {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 4rem;
   }
 
   a {
