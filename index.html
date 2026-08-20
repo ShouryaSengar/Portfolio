@@ -6,9 +6,43 @@
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#E6E9E3" />
 
-    <!-- Preload the display face only. It renders the LCP text, so it must not
-         wait on CSS discovery. Plex Mono is below-the-fold detail and is left to
-         normal discovery. -->
+    <!-- Primary meta -->
+    <title>Shourya Singh Sengar — Software Engineer, React &amp; React Native</title>
+    <meta
+      name="description"
+      content="Software Engineer building server-driven UI and schema-driven platforms for enterprise insurance and fintech. React, React Native, TypeScript. 2+ years, 100,000+ DAU across 3 production apps."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Shourya Singh Sengar — Software Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Server-driven UI and schema-driven platforms for enterprise insurance and fintech. React, React Native, TypeScript."
+    />
+    <!-- og:url and og:image will be set once the Vercel domain is known and the OG
+         image is authored in Phase 7. Omitting them is valid — the page still renders
+         a link preview using the title and description. -->
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Shourya Singh Sengar — Software Engineer"
+    />
+    <meta
+      name="twitter:description"
+      content="Server-driven UI and schema-driven platforms for enterprise insurance and fintech."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload the display face — it renders the LCP text, so it must not wait on
+         CSS discovery. Plex Mono is below-the-fold detail and left to normal load. -->
     <link
       rel="preload"
       href="/fonts/archivo-var-latin.woff2"
@@ -17,29 +51,15 @@
       crossorigin
     />
 
-    <!--
-      PLACEHOLDER METADATA — Phase 0 scaffold only.
-      Real title, description, and OG tags land in Phase 5 once the copy exists.
-      Do not ship this as-is.
-    -->
-    <title>Shourya Singh Sengar — Software Engineer</title>
-    <meta
-      name="description"
-      content="Software Engineer specialising in React and React Native, building server-driven UI for enterprise insurance and fintech."
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>
     <div id="root"></div>
     <noscript>
       <!--
-        No contact address here, deliberately. This is static markup, which is
-        precisely what bulk address harvesters read — putting the email in this
-        fallback would defeat the client-side assembly in shared/lib/contact
-        entirely. Profile URLs are safe: they are already public pages, not
-        harvestable addresses.
+        No contact address here. This is static markup, which is precisely what bulk
+        address harvesters read — putting the email in this fallback would defeat the
+        client-side assembly in shared/lib/contact entirely.
       -->
       This site needs JavaScript to run. Shourya Singh Sengar — Software Engineer,
       React and React Native. Reach him via

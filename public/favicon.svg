@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!--
+    Monogram: S — the first letter. Rendered in the ink colour against the ledger
+    canvas so it sits in the palette rather than introducing a mark with its own
+    colour system. currentColor inherits from the parent, but favicons have no
+    parent context, so the colours are explicit here.
+  -->
+  <rect width="32" height="32" rx="4" fill="#E6E9E3"/>
+  <text
+    x="16" y="24"
+    font-family="system-ui, sans-serif"
+    font-size="22"
+    font-weight="700"
+    fill="#14171A"
+    text-anchor="middle"
+  >S</text>
+</svg>
