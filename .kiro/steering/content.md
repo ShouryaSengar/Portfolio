@@ -316,12 +316,36 @@ the template answer — only use it if it genuinely beats the alternatives here.
   published under their brands), so they can be used. Internal system details should not
   be.
 
+## Placeholder assets — the swap-later policy
+
+Shourya has approved building with dummy assets and replacing them once the site is
+otherwise complete. That is a reasonable call, and it is handled as follows so it stays
+reasonable:
+
+- **`src/content/assets.ts` is the registry.** Every image, diagram, and document the
+  site needs is listed with a `status` of `placeholder` or `final`, plus who owns it.
+- **`shared/ui/Placeholder` renders the stand-ins.** It states what belongs there and
+  reserves the exact final `aspect-ratio`, so dropping the real asset in later causes no
+  layout shift. It is deliberately impossible to mistake for finished work, and it is
+  announced to screen readers rather than hidden.
+- **`npm run assets`** reports what is still pending, grouped by owner.
+- **`npm run assets:strict`** exits non-zero if any placeholder remains. **Phase 8 runs
+  this as a release gate**, so a dummy cannot ship silently.
+
+To promote an asset: drop the file in, set `status: 'final'`, set `src`, and keep `ratio`
+identical to what the placeholder reserved.
+
 ## Still outstanding
 
-**One item.** The latest resume PDF needs to land in the repo as `public/resume.pdf`. The
-existing `Shourya SinghSengar_Resume.pdf` in the repo root is an older revision — the
-version this file was parsed from is newer and is the one to publish. Needed by Phase 7,
-not blocking earlier phases.
+Both are owned by Shourya and are the only assets not authored in-project:
+
+1. **Portrait** — background-free, so it composites on the ledger canvas. Convert to
+   AVIF with alpha, keep under 150 kB.
+2. **Resume PDF** — the repo copy `Shourya SinghSengar_Resume.pdf` is an older revision.
+   The version this file was parsed from is newer and is the one to publish, at
+   `public/resume.pdf`.
+
+Neither blocks Phase 5 or 6. Both block the Phase 8 release gate.
 
 Resolved: LinkedIn URL, phone publication (yes, with client-side assembly), email,
 company name, project list and ordering, availability and remote status, client asset

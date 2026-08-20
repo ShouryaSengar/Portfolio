@@ -20,7 +20,10 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "verify": "npm run typecheck && npm run lint && npm run build",
     "analyze": "ANALYZE=true vite build",
-    "icons": "node scripts/generate-tech-icons.mjs"
+    "icons": "node scripts/generate-tech-icons.mjs",
+    "assets": "node scripts/verify-assets.mjs",
+    "assets:strict": "node scripts/verify-assets.mjs --strict",
+    "icons:verify": "node scripts/verify-icons.mjs"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
