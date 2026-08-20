@@ -65,6 +65,17 @@ triggers layout and paint on every frame and drops frames on mid-range phones.
 
 Never `transition: all`. Name the exact properties.
 
+**Tailwind v4 gotcha — name `scale`, not `transform`.** In v4, `scale-*`, `rotate-*`, and
+`translate-*` compile to the standalone CSS `scale` / `rotate` / `translate` properties, not to
+`transform: scale(...)`. A transition that names `transform` therefore does **not** apply to
+them: the change snaps instead of easing, silently and with no error. Write
+`transition-[color,scale]`, not `transition-[color,transform]`.
+
+These standalone properties are still compositor-friendly, so the performance guidance above is
+unchanged — only the property name in the transition list is affected. Confirm against the
+compiled CSS rather than assuming a transition took effect; this one is invisible in source and
+obvious in the emitted stylesheet.
+
 ## Entrance rules
 
 - **Never animate from `scale(0)`.** Nothing appears from nothing. Start at `scale(0.95)` and

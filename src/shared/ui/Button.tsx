@@ -19,9 +19,17 @@ const buttonStyles = cva(
     'inline-flex items-center justify-center gap-2',
     'rounded-[var(--radius-control)] border',
     'font-medium whitespace-nowrap',
-    // Name the exact properties. `transition-all` animates things you did not
-    // intend, including layout properties (.kiro/skills/motion-craft).
-    'transition-[color,background-color,border-color,transform]',
+    // Name the exact properties. Animating every property is wasteful and catches
+    // things you did not intend, including layout ones (.kiro/skills/motion-craft).
+    // Utility names are avoided in these comments on purpose: Tailwind's scanner
+    // reads raw text and will emit any class name it finds, comments included.
+    // See tailwind-design-system "Scanning".
+    //
+    // NOTE the list below names `scale`, not `transform`. Tailwind v4 compiles
+    // scale utilities to the standalone CSS `scale` property rather than to
+    // `transform: scale()`, so naming `transform` here would silently not apply
+    // and the press would snap instead of easing. Verified in the compiled CSS.
+    'transition-[color,background-color,border-color,scale]',
     'duration-150 ease-[var(--ease-out-quint)]',
     // Press feedback. Never below 0.95 — that reads as a bug, not a press.
     'active:scale-[0.97]',
@@ -35,10 +43,7 @@ const buttonStyles = cva(
     variants: {
       intent: {
         /* The single accent, reserved for the one primary action in a view. */
-        primary: [
-          'border-stamp bg-stamp text-leaf',
-          'hover:border-ink hover:bg-ink',
-        ],
+        primary: ['border-stamp bg-stamp text-leaf', 'hover:border-ink hover:bg-ink'],
         /* Default for most actions. Structure from a rule, not a fill. */
         secondary: [
           'border-rule-strong bg-leaf text-ink',
@@ -52,10 +57,14 @@ const buttonStyles = cva(
         ],
       },
       size: {
-        /* 40px — the WCAG 2.5.5 floor. Do not go smaller. */
-        sm: 'h-10 px-4 text-[length:var(--text-sm)]',
+        /* 40px — the WCAG 2.5.5 floor. Do not go smaller.
+           Plain `text-sm` rather than text-[length:var(--text-sm)]: the token is
+           declared in @theme so the utility already resolves to it, AND
+           tailwind-merge recognises the named utility as a font-size, so a call
+           site can override it via className. The arbitrary form defeats that. */
+        sm: 'h-10 px-4 text-sm',
         /* 44px — the WCAG 2.5.5 target. Default. */
-        md: 'h-11 px-5 text-[length:var(--text-base)]',
+        md: 'h-11 px-5 text-base',
       },
       block: {
         true: 'w-full',

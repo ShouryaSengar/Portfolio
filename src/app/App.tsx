@@ -1,113 +1,194 @@
+import { Button, ButtonLink } from '@shared/ui/Button';
+import { Card } from '@shared/ui/Card';
+import { DataList, DataRow } from '@shared/ui/DataList';
+import { Eyebrow } from '@shared/ui/Eyebrow';
+import { Rule } from '@shared/ui/Rule';
+import { Section } from '@shared/ui/Section';
+import { Tag } from '@shared/ui/Tag';
+
 /**
- * PHASE 2 TOKEN SPECIMEN — not final UI.
+ * PHASE 3 SPECIMEN SHEET — not the final site.
  *
- * This renders the Direction A token system so it can be inspected in a browser:
- * both Archivo width axes, the four ink levels, the surface ladder, the ruling
- * grid, and the accent. It is a specimen sheet, not a design.
+ * Assembled entirely from shared/ui primitives, with no ad-hoc markup and no raw
+ * values. Its job is to prove the primitives compose and to make the token system
+ * inspectable in a browser.
  *
- * Sections replace this entirely from Phase 5. Delete the body then.
+ * Real sections arrive in Phase 5 and will live under features/, at which point
+ * this file becomes a thin composition root. Delete the body then.
+ *
+ * Content below is drawn from .kiro/steering/content.md so the primitives are
+ * exercised against realistic strings and figures rather than lorem.
  */
 
-const inkLevels = [
-  { token: '--color-ink', label: 'ink', use: 'primary text', cls: 'text-ink' },
-  {
-    token: '--color-ink-muted',
-    label: 'ink-muted',
-    use: 'supporting copy',
-    cls: 'text-ink-muted',
-  },
-  {
-    token: '--color-ink-faint',
-    label: 'ink-faint',
-    use: 'metadata, large text only',
-    cls: 'text-ink-faint',
-  },
-] as const;
+const STACK = ['React Native', 'Expo', 'Redux', 'TypeScript'] as const;
 
-const surfaces = [
-  { token: '--color-ledger', label: 'ledger', use: 'canvas', cls: 'bg-ledger' },
-  { token: '--color-leaf', label: 'leaf', use: 'raised', cls: 'bg-leaf' },
-  { token: '--color-leaf-sunk', label: 'leaf-sunk', use: 'inset', cls: 'bg-leaf-sunk' },
+const SURFACES = [
+  { key: 'raised', label: 'raised', note: 'one step above canvas' },
+  { key: 'sunk', label: 'sunk', note: 'inset — receives content' },
+  { key: 'bare', label: 'bare', note: 'outline only' },
 ] as const;
 
 export function App() {
   return (
-    // Shell takes a CONTAINER width, never a prose measure. Gutter grows with
-    // the viewport instead of letting content stretch to fill it.
-    <main className="mx-auto max-w-content px-6 py-16 md:px-10 lg:px-16">
-      <p className="text-ink-faint font-mono text-[length:var(--text-caption)] tracking-[0.18em] uppercase">
-        Phase 2 — token specimen
-      </p>
+    <main>
+      {/* ------------------------------------------------------------- lead --- */}
+      <Section aria-labelledby="lead-heading" rhythm="major">
+        <Eyebrow>Phase 3 — component specimen</Eyebrow>
+        <h1 id="lead-heading" className="text-display mt-3">
+          Ledger
+        </h1>
+        <p className="text-ink-muted mt-5 max-w-prose">
+          Every element below is a <code className="font-mono text-sm">shared/ui</code>{' '}
+          primitive bound to semantic tokens. The shell is 1200px; this paragraph is
+          capped at 65 characters for reading comfort. Rules are functional — each one
+          marks a real boundary.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <ButtonLink href="/resume.pdf" intent="primary">
+            Download resume
+          </ButtonLink>
+          <ButtonLink
+            href="https://github.com/ShouryaSengar"
+            target="_blank"
+            intent="secondary"
+          >
+            GitHub
+          </ButtonLink>
+        </div>
+      </Section>
 
-      {/* Display role: condensed width, heavy weight. */}
-      <h1 className="text-ink mt-3 text-[length:var(--text-display)]">Ledger</h1>
+      {/* A full-bleed rule is a SIBLING of Section, so it sits outside the padded
+          container by structure rather than by negative margin. */}
+      <Rule weight="strong" />
 
-      {/* Prose alone is measure-constrained — this is a legibility rule, not layout. */}
-      <p className="text-ink-muted mt-4 max-w-prose">
-        Archivo Variable at two widths, IBM Plex Mono for data, and the greenbar palette.
-        Rules are functional: each one below marks a real boundary. The shell is 1200px;
-        this paragraph is capped at 68 characters for reading comfort.
-      </p>
-
-      <hr className="mt-10" />
-
-      {/* Key/value alignment — the recurring layout motif. */}
-      <section className="mt-8" aria-labelledby="ink-heading">
-        <h2 id="ink-heading" className="text-ink text-[length:var(--text-xl)]">
-          Ink levels
+      {/* ---------------------------------------------------------- buttons --- */}
+      <Section aria-labelledby="buttons-heading">
+        <Eyebrow>Controls</Eyebrow>
+        <h2 id="buttons-heading" className="mt-2 text-2xl">
+          Buttons
         </h2>
-        <dl className="mt-4">
-          {inkLevels.map(({ token, label, use, cls }) => (
-            <div
-              key={token}
-              className="border-rule flex items-baseline justify-between gap-4 border-b py-3"
-            >
-              <dt className={`${cls} font-mono text-[length:var(--text-sm)]`}>{label}</dt>
-              <dd className="text-ink-faint text-[length:var(--text-sm)]">{use}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
 
-      <section className="mt-10" aria-labelledby="surface-heading">
-        <h2 id="surface-heading" className="text-ink text-[length:var(--text-xl)]">
-          Surface ladder
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Button intent="primary">Primary</Button>
+          <Button intent="secondary">Secondary</Button>
+          <Button intent="ghost">Ghost</Button>
+          <Button intent="secondary" size="sm">
+            Small
+          </Button>
+          <Button intent="primary" disabled>
+            Disabled
+          </Button>
+        </div>
+
+        <p className="text-ink-faint mt-4 max-w-prose text-sm">
+          Tab through these to check the focus ring, and hold a click to see the 0.97
+          press. Disabled keeps its cursor so the reason for inaction is visible.
+        </p>
+      </Section>
+
+      <Rule />
+
+      {/* ------------------------------------------------------ surfaces --- */}
+      <Section aria-labelledby="surfaces-heading">
+        <Eyebrow>Elevation</Eyebrow>
+        <h2 id="surfaces-heading" className="mt-2 text-2xl">
+          Surfaces
         </h2>
-        {/* Uses the full container width — demonstrates that sections vary
-            deliberately rather than all sitting at one measure. */}
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          {surfaces.map(({ token, label, use, cls }) => (
-            <div
-              key={token}
-              className={`${cls} border-rule rounded-[var(--radius-card)] border p-4`}
-            >
-              <p className="text-ink font-mono text-[length:var(--text-sm)]">{label}</p>
-              <p className="text-ink-faint mt-1 text-[length:var(--text-caption)]">
-                {use}
-              </p>
-            </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {SURFACES.map(({ key, label, note }) => (
+            <Card key={key} surface={key}>
+              <p className="text-ink font-mono text-sm">{label}</p>
+              <p className="text-ink-faint text-caption mt-1">{note}</p>
+            </Card>
           ))}
         </div>
-      </section>
 
-      <section className="mt-10" aria-labelledby="accent-heading">
-        <h2 id="accent-heading" className="text-ink text-[length:var(--text-xl)]">
-          Accent and numerals
-        </h2>
-        <div className="border-rule mt-4 flex flex-wrap items-baseline gap-6 border-t pt-4">
-          <p className="text-stamp font-mono text-[length:var(--text-sm)]">stamp</p>
-          <a href="#accent-heading" className="text-[length:var(--text-sm)] underline">
-            carbon link
-          </a>
-          {/* tabular-nums applies via the `tabular` selector in theme.css */}
-          <p className="tabular text-ink text-[length:var(--text-2xl)] font-semibold">
-            100,000+
+        {/* `interactive` supplies hover AND focus-within, so the affordance is
+            equally available to keyboard users. */}
+        <Card interactive padding="lg" className="mt-4">
+          <Eyebrow tone="accent">Interactive card</Eyebrow>
+          <h3 className="mt-2 text-xl">ABHI One</h3>
+          <p className="text-ink-muted mt-2 max-w-prose text-sm">
+            Schema-driven form platform rendering 15+ policy workflows from API metadata.
+            Hover the card, then tab to the link inside it — the border responds to both.
           </p>
-          <p className="text-ink-faint text-[length:var(--text-caption)]">
-            daily active users
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {STACK.map((item) => (
+              <li key={item}>
+                <Tag>{item}</Tag>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5">
+            <ButtonLink
+              href="https://abhioneapp.adityabirlahealth.com/"
+              target="_blank"
+              intent="ghost"
+              size="sm"
+            >
+              Visit site
+            </ButtonLink>
+          </div>
+        </Card>
+      </Section>
+
+      <Rule />
+
+      {/* ----------------------------------------------------------- data --- */}
+      <Section aria-labelledby="data-heading" width="feature">
+        <Eyebrow>Key / value</Eyebrow>
+        <h2 id="data-heading" className="mt-2 text-2xl">
+          Data rows
+        </h2>
+        <p className="text-ink-muted mt-3 max-w-prose text-sm">
+          A real description list. Numeric values use tabular figures so the right edge
+          stays flush as digits change.
+        </p>
+
+        <DataList className="mt-6">
+          <DataRow label="Role" value="Software Engineer" />
+          <DataRow label="Daily active users" value="100,000+" numeric />
+          <DataRow label="Applications in production" value="3" numeric />
+          <DataRow label="Release cycle reduction" value="80%" numeric />
+          <DataRow label="Form development effort saved" value="70%" numeric />
+          <DataRow
+            label="Platforms"
+            value={
+              <span className="flex flex-wrap justify-end gap-2">
+                <Tag tone="outline">iOS</Tag>
+                <Tag tone="outline">Android</Tag>
+                <Tag tone="outline">Web</Tag>
+              </span>
+            }
+          />
+        </DataList>
+      </Section>
+
+      <Rule />
+
+      {/* ------------------------------------------------------ typography --- */}
+      <Section aria-labelledby="type-heading" rhythm="major">
+        <Eyebrow>Typography</Eyebrow>
+        <h2 id="type-heading" className="mt-2 text-2xl">
+          One family, two widths
+        </h2>
+        <p className="text-ink-muted mt-3 max-w-prose text-sm">
+          Headings take Archivo at 78% width and weight 700. Body sits at 100% and 400.
+          Both come from a single variable font file.
+        </p>
+
+        <div className="mt-8 space-y-4">
+          <p className="text-3xl">Display 39 — condensed</p>
+          <p className="text-2xl">Heading 31 — condensed</p>
+          <p className="text-xl">Subhead 25 — condensed</p>
+          <p className="text-base">Body 16 — normal width, regular weight</p>
+          <p className="text-ink-muted text-sm">Small 13 — supporting copy</p>
+          <p className="text-caption text-ink-faint font-mono">
+            Caption 11 — mono, passes AA at 5.20:1
           </p>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

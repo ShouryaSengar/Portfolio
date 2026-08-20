@@ -189,6 +189,26 @@ this wrong and no other detail matters.
 The tell of slop is the same long `className` string sprayed across nine call sites. That is a
 missing component, not styling.
 
+## Scanning: Tailwind reads raw text, not code
+
+Tailwind v4's source detection scans files as plain text. It does not parse them, so it
+cannot tell code from prose. Two consequences, both of which silently inflate the bundle:
+
+- **Comments count.** A code comment containing a literal utility name — even one saying
+  *never use this* — causes that utility to be emitted. Write class names in CSS syntax
+  (`transition: all`) rather than utility syntax when discussing them in prose.
+- **Markdown counts.** Documentation with Tailwind class names in code samples compiles
+  those samples into the production stylesheet. Exclude doc directories explicitly:
+
+```css
+@import 'tailwindcss';
+@source not "../../.kiro";
+```
+
+Both were observed in this project: excluding `.kiro/` alone cut the stylesheet from
+22.26 kB to 18.77 kB raw. Audit the emitted CSS for utilities you never wrote —
+`transition-property:all` appearing when nothing uses it is the tell.
+
 ## Avoid
 
 - Harsh borders — if borders are the first thing you see, they are too strong
