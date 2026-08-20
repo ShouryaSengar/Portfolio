@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <!-- Background -->
+  <rect width="960" height="540" fill="#FAF9F7"/>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-family="monospace" font-size="11" letter-spacing="2" fill="#8B8B8B">mREC PIPELINE — CONFIG-DRIVEN UI</text>
+
+  <!-- Flow: Strapi CMS → S3 → Runtime JSON → Rule Engine → Rendered UI -->
+
+  <!-- Node 1: Strapi CMS -->
+  <rect x="40" y="200" width="150" height="80" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="115" y="232" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">CMS</text>
+  <text x="115" y="256" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Strapi</text>
+  <text x="115" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Schema authoring</text>
+
+  <!-- Arrow 1 -->
+  <line x1="190" y1="240" x2="240" y2="240" stroke="#2A7C6B" stroke-width="1.5"/>
+  <polygon points="240,236 248,240 240,244" fill="#2A7C6B"/>
+  <text x="215" y="228" text-anchor="middle" font-family="monospace" font-size="9" fill="#2A7C6B">publish</text>
+
+  <!-- Node 2: AWS S3 -->
+  <rect x="250" y="200" width="150" height="80" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="325" y="232" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">STORAGE</text>
+  <text x="325" y="256" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">AWS S3</text>
+  <text x="325" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">JSON schemas</text>
+
+  <!-- Arrow 2 -->
+  <line x1="400" y1="240" x2="450" y2="240" stroke="#2A7C6B" stroke-width="1.5"/>
+  <polygon points="450,236 458,240 450,244" fill="#2A7C6B"/>
+  <text x="425" y="228" text-anchor="middle" font-family="monospace" font-size="9" fill="#2A7C6B">fetch</text>
+
+  <!-- Node 3: Runtime JSON -->
+  <rect x="460" y="200" width="150" height="80" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="535" y="232" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">RUNTIME</text>
+  <text x="535" y="256" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">JSON Config</text>
+  <text x="535" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Pages, forms, inputs</text>
+
+  <!-- Arrow 3 -->
+  <line x1="610" y1="240" x2="660" y2="240" stroke="#2A7C6B" stroke-width="1.5"/>
+  <polygon points="660,236 668,240 660,244" fill="#2A7C6B"/>
+  <text x="635" y="228" text-anchor="middle" font-family="monospace" font-size="9" fill="#2A7C6B">resolve</text>
+
+  <!-- Node 4: Rule Engine -->
+  <rect x="670" y="200" width="150" height="80" rx="4" stroke="#2A7C6B" stroke-width="1.5" fill="#F0F7F5"/>
+  <text x="745" y="232" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#2A7C6B">ENGINE</text>
+  <text x="745" y="256" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Rule Engine</text>
+  <text x="745" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Conditional visibility</text>
+
+  <!-- Arrow 4: down to rendered UI -->
+  <line x1="745" y1="280" x2="745" y2="340" stroke="#2A7C6B" stroke-width="1.5"/>
+  <polygon points="741,340 745,348 749,340" fill="#2A7C6B"/>
+  <text x="760" y="315" font-family="monospace" font-size="9" fill="#2A7C6B">render</text>
+
+  <!-- Node 5: Rendered UI -->
+  <rect x="620" y="350" width="250" height="80" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="745" y="382" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">OUTPUT</text>
+  <text x="745" y="406" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Dynamic UI</text>
+  <text x="745" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Zero-deployment updates</text>
+
+  <!-- Key insight callout -->
+  <rect x="40" y="380" width="320" height="60" rx="4" stroke="#C8D5D3" stroke-width="1" stroke-dasharray="4 3" fill="#FFFFFF"/>
+  <text x="60" y="405" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#2A7C6B">KEY INSIGHT</text>
+  <text x="60" y="425" font-family="system-ui, sans-serif" font-size="12" fill="#1A1A1A">Stakeholders edit schema, UI re-renders.</text>
+  <text x="60" y="440" font-family="system-ui, sans-serif" font-size="12" fill="#6B6B6B">No developer, no deployment.</text>
+
+  <!-- Bottom metrics -->
+  <line x1="40" y1="490" x2="920" y2="490" stroke="#C8D5D3" stroke-width="1"/>
+  <text x="200" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">80%</text>
+  <text x="200" y="535" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">SHORTER RELEASE CYCLE</text>
+  <text x="480" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">20+</text>
+  <text x="480" y="535" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">DEV HOURS SAVED/WEEK</text>
+  <text x="760" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">0</text>
+  <text x="760" y="535" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">DEPLOYMENTS FOR UI CHANGES</text>
+</svg>

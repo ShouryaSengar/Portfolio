@@ -101,7 +101,22 @@ export function CaseStudy({ project, index, prominence = 'standard' }: CaseStudy
           architecture diagram squeezed into a side column is unreadable, which defeats
           the point of leading with diagrams instead of screenshots. */}
       <div className="mt-10">
-        <Placeholder label={diagram.label} ratio={diagram.ratio} note={diagram.note} />
+        {diagram.status === 'final' && diagram.src ? (
+          <img
+            src={diagram.src}
+            alt={diagram.label}
+            className="border-rule w-full rounded-card border"
+            style={{ aspectRatio: String(diagram.ratio) }}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Placeholder
+            label={diagram.label}
+            ratio={diagram.ratio}
+            note={diagram.note}
+          />
+        )}
       </div>
 
       {/* ---------------------------------------------------- contributions --- */}

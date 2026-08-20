@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <!-- Background -->
+  <rect width="960" height="540" fill="#FAF9F7"/>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-family="monospace" font-size="11" letter-spacing="2" fill="#8B8B8B">mSPACE — SUPERAPP CONSOLIDATION</text>
+
+  <!-- Top row: 5 separate apps -->
+  <text x="480" y="80" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">BEFORE: 5 STANDALONE APPS</text>
+
+  <rect x="60" y="95" width="140" height="55" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="130" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">App 1</text>
+
+  <rect x="220" y="95" width="140" height="55" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="290" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">App 2</text>
+
+  <rect x="380" y="95" width="140" height="55" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="450" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">App 3</text>
+
+  <rect x="540" y="95" width="140" height="55" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="610" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">App 4</text>
+
+  <rect x="700" y="95" width="140" height="55" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="770" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">App 5</text>
+
+  <!-- Convergence arrows -->
+  <line x1="130" y1="150" x2="480" y2="200" stroke="#C8D5D3" stroke-width="1"/>
+  <line x1="290" y1="150" x2="480" y2="200" stroke="#C8D5D3" stroke-width="1"/>
+  <line x1="450" y1="150" x2="480" y2="200" stroke="#C8D5D3" stroke-width="1"/>
+  <line x1="610" y1="150" x2="480" y2="200" stroke="#C8D5D3" stroke-width="1"/>
+  <line x1="770" y1="150" x2="480" y2="200" stroke="#C8D5D3" stroke-width="1"/>
+  <polygon points="476,200 480,208 484,200" fill="#2A7C6B"/>
+
+  <!-- Central unified platform -->
+  <rect x="280" y="210" width="400" height="80" rx="4" stroke="#2A7C6B" stroke-width="2" fill="#F0F7F5"/>
+  <text x="480" y="240" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#2A7C6B">UNIFIED PLATFORM</text>
+  <text x="480" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#1A1A1A">mSpace SuperApp</text>
+  <text x="480" y="283" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B6B6B">Deep linking + modular navigation</text>
+
+  <!-- Three pillars below the platform -->
+  <line x1="360" y1="290" x2="360" y2="320" stroke="#2A7C6B" stroke-width="1.5"/>
+  <line x1="480" y1="290" x2="480" y2="320" stroke="#2A7C6B" stroke-width="1.5"/>
+  <line x1="600" y1="290" x2="600" y2="320" stroke="#2A7C6B" stroke-width="1.5"/>
+
+  <!-- Pillar 1: Auth -->
+  <rect x="270" y="320" width="180" height="70" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="360" y="348" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">IDENTITY</text>
+  <text x="360" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">Token Lifecycle</text>
+  <text x="360" y="383" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Cognito + JWT + 2FA lock</text>
+
+  <!-- Pillar 2: RBAC -->
+  <rect x="390" y="320" width="180" height="70" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF" transform="translate(0,0)"/>
+  <!-- Repositioning pillar 2 -->
+  <rect x="390" y="320" width="180" height="70" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="480" y="348" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">ACCESS</text>
+  <text x="480" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">RBAC Layer</text>
+  <text x="480" y="383" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">5+ personas gated</text>
+
+  <!-- Pillar 3: WebView bridge -->
+  <rect x="510" y="320" width="180" height="70" rx="4" stroke="#C8D5D3" stroke-width="1.5" fill="#FFFFFF"/>
+  <text x="600" y="348" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#8B8B8B">BRIDGE</text>
+  <text x="600" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">WebView Native</text>
+  <text x="600" y="383" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6B6B6B">Download, share, events</text>
+
+  <!-- Bottom metrics -->
+  <line x1="40" y1="450" x2="920" y2="450" stroke="#C8D5D3" stroke-width="1"/>
+  <text x="200" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">40%</text>
+  <text x="200" y="505" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">HIGHER TASK COMPLETION</text>
+  <text x="480" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">50%</text>
+  <text x="480" y="505" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">FEWER UNAUTHORIZED SESSIONS</text>
+  <text x="760" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2A7C6B">35%</text>
+  <text x="760" y="505" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B8B8B">HIGHER SAME-DAY ACTIONS</text>
+</svg>

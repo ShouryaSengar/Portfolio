@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background: Ledger canvas colour -->
+  <rect width="1200" height="630" fill="#FAF9F7"/>
+
+  <!-- Top rule line -->
+  <line x1="80" y1="80" x2="1120" y2="80" stroke="#C8D5D3" stroke-width="1"/>
+
+  <!-- Status / Availability -->
+  <text x="80" y="140" font-family="monospace" font-size="13" letter-spacing="2" fill="#2A7C6B" text-transform="uppercase">AVAILABLE FOR WORK</text>
+
+  <!-- Name -->
+  <text x="80" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#1A1A1A" letter-spacing="-2">Shourya Singh Sengar</text>
+
+  <!-- Title -->
+  <text x="80" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#6B6B6B">Software Engineer</text>
+
+  <!-- Divider rule -->
+  <line x1="80" y1="340" x2="1120" y2="340" stroke="#C8D5D3" stroke-width="1"/>
+
+  <!-- Data rows -->
+  <text x="80" y="390" font-family="monospace" font-size="14" letter-spacing="1.5" fill="#8B8B8B">SPECIALISATION</text>
+  <text x="300" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#1A1A1A">React and React Native</text>
+
+  <text x="80" y="430" font-family="monospace" font-size="14" letter-spacing="1.5" fill="#8B8B8B">IN PRODUCTION</text>
+  <text x="300" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#1A1A1A">3 enterprise applications</text>
+
+  <text x="80" y="470" font-family="monospace" font-size="14" letter-spacing="1.5" fill="#8B8B8B">DAILY USERS</text>
+  <text x="300" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#2A7C6B">100,000+</text>
+
+  <!-- Bottom rule -->
+  <line x1="80" y1="540" x2="1120" y2="540" stroke="#C8D5D3" stroke-width="1"/>
+
+  <!-- URL -->
+  <text x="80" y="580" font-family="monospace" font-size="14" letter-spacing="1" fill="#8B8B8B">portfolio-shourya-sengar.vercel.app</text>
+
+  <!-- Schema indicator (the signature) -->
+  <text x="1120" y="580" font-family="monospace" font-size="13" fill="#2A7C6B" text-anchor="end">{ inspect: schema }</text>
+</svg>
