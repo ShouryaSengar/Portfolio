@@ -1,7 +1,7 @@
 import { profile } from '@content/profile';
 import { projects } from '@content/projects';
 import { roles } from '@content/experience';
-import { capabilityGroups } from '@content/stack';
+import { alsoKnown, architecture, stack } from '@content/stack';
 import { mailtoHref, revealContact, telHref } from '@shared/lib/contact';
 import { ButtonLink } from '@shared/ui/Button';
 import { Card } from '@shared/ui/Card';
@@ -10,6 +10,7 @@ import { Eyebrow } from '@shared/ui/Eyebrow';
 import { Rule } from '@shared/ui/Rule';
 import { Section } from '@shared/ui/Section';
 import { Tag } from '@shared/ui/Tag';
+import { TechIcon } from '@shared/ui/TechIcon';
 
 /**
  * PHASE 4 SPECIMEN — not the final site.
@@ -180,35 +181,46 @@ export function App() {
       <Section aria-labelledby="stack-heading" rhythm="major">
         <Eyebrow>Capabilities</Eyebrow>
         <h2 id="stack-heading" className="mt-2 text-2xl">
-          Evidenced, not rated
+          What I work with
         </h2>
-        <p className="text-ink-muted mt-3 max-w-prose text-sm">
-          No percentages. Each item names the production work that proves it, or stands
-          without a claim.
-        </p>
 
-        <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {capabilityGroups.map((group) => (
-            <div key={group.label}>
-              <Eyebrow tone="muted">{group.label}</Eyebrow>
-              <DataList className="mt-3" density="tight">
-                {group.items.map((item) => (
-                  <DataRow
-                    key={item.name}
-                    label={item.name}
-                    value={
-                      item.provenBy.length > 0 ? (
-                        <span className="text-ink-faint text-caption font-mono">
-                          {item.provenBy.join(' · ')}
-                        </span>
-                      ) : (
-                        ''
-                      )
-                    }
-                  />
-                ))}
-              </DataList>
+        {/* Tier 1 — architecture leads and gets prose, not a chip. These are the
+            differentiator, so they are the one thing here given real space. */}
+        <div className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-3">
+          {architecture.map((pattern) => (
+            <div key={pattern.name}>
+              <h3 className="text-lg">{pattern.name}</h3>
+              <p className="text-ink-muted mt-2 text-sm">{pattern.note}</p>
             </div>
+          ))}
+        </div>
+
+        <Rule spacing="loose" />
+
+        {/* Tier 2 — a ruled cell grid. Borders on the container plus one edge per cell
+            give a continuous ruling rather than detached chips, so it reads as a
+            register instead of a tag cloud. */}
+        <ul className="border-rule grid grid-cols-2 border-t border-l sm:grid-cols-3 lg:grid-cols-4">
+          {stack.map((item) => (
+            <li
+              key={item.name}
+              className="border-rule flex items-center gap-3 border-r border-b px-4 py-3"
+            >
+              {/* Every item in this tier has a mark by definition — that is what
+                  distinguishes it from `alsoKnown`. No conditional needed. */}
+              <TechIcon id={item.icon} className="text-ink-faint" />
+              <span className="text-ink text-sm">{item.name}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Tier 3 — quiet, text-only, making no visual claim. */}
+        <div className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2">
+          <Eyebrow className="mr-1">Also</Eyebrow>
+          {alsoKnown.map((item) => (
+            <span key={item} className="text-ink-muted text-sm">
+              {item}
+            </span>
           ))}
         </div>
       </Section>

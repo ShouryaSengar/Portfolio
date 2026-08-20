@@ -1,3 +1,5 @@
+import type { TechIconId } from '@shared/ui/icons/techIcons';
+
 /**
  * Types for the content layer.
  *
@@ -151,26 +153,47 @@ export interface Role {
 
 /* ------------------------------------------------------------------ stack --- */
 
+/* ------------------------------------------------------------------ stack --- */
+
 /**
- * A capability, with the shipped work that evidences it.
+ * Capabilities are stated, not rated and not proved.
  *
- * There is no proficiency field, by design. The old site rated skills as
- * percentages, which read as junior and could not be defended. `provenBy` names
- * project slugs instead: the proof is the link.
+ * There is no proficiency field and no evidence field. The old site rated skills as
+ * percentages, which reads as junior and cannot be defended when someone asks what
+ * the number means. An earlier draft swung the other way and tied every skill to the
+ * projects that proved it, which turned a simple "here is what I work with" into an
+ * argument nobody asked for. The case studies already carry the evidence.
  *
- * Generic over the slug type so `stack.ts` can bind it to the real `ProjectSlug`
- * union and have a mistyped slug fail compilation. Kept generic rather than
- * importing the union directly, which would make types.ts depend on projects.ts
- * and create a cycle. Defaults to `string` so the type is usable on its own.
+ * Three tiers, because they are genuinely different kinds of thing and flattening
+ * them into one grid was the real problem:
+ *
+ *   1. `ArchitecturePattern` — the differentiator. Concepts, no logos, given room.
+ *   2. `TechItem`           — the recognisable stack. Scannable, marked with a logo.
+ *   3. plain strings        — everything else, quiet and text-only.
  */
-export interface Capability<TSlug extends string = string> {
+
+/**
+ * An architectural approach. Carries a short note because the name alone means
+ * little to a non-technical reader and everything to a technical one.
+ */
+export interface ArchitecturePattern {
   readonly name: string;
-  /** Project slugs where this shipped to production. Legitimately empty for
-      things not evidenced by the three case studies. */
-  readonly provenBy: readonly TSlug[];
+  readonly note: string;
 }
 
-export interface CapabilityGroup<TSlug extends string = string> {
-  readonly label: string;
-  readonly items: readonly Capability<TSlug>[];
+/**
+ * A technology in the working stack.
+ *
+ * `icon` is REQUIRED, and that requirement is what separates this tier from the next.
+ * A thing belongs here when it has a mark a reader recognises instantly; a thing with
+ * no mark belongs in `alsoKnown` as plain text. Making the icon optional blurred that
+ * line and left a permanently-dead branch in the view, which the linter flagged.
+ *
+ * The type is a type-only reference to the generated icon set, so it is erased at
+ * build time — content gains no runtime dependency on presentation, but a typo'd icon
+ * id fails compilation rather than rendering an empty box.
+ */
+export interface TechItem {
+  readonly name: string;
+  readonly icon: TechIconId;
 }

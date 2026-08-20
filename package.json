@@ -19,7 +19,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "verify": "npm run typecheck && npm run lint && npm run build",
-    "analyze": "ANALYZE=true vite build"
+    "analyze": "ANALYZE=true vite build",
+    "icons": "node scripts/generate-tech-icons.mjs"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
@@ -45,6 +46,7 @@
     "prettier": "3.9.6",
     "prettier-plugin-tailwindcss": "0.8.1",
     "rollup-plugin-visualizer": "7.1.1",
+    "simple-icons": "16.28.0",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
     "typescript-eslint": "8.67.0",
