@@ -1,9 +1,8 @@
-import { profile } from '@content/profile';
 import { projects } from '@content/projects';
 import { roles } from '@content/experience';
 import { alsoKnown, architecture, stack } from '@content/stack';
 import { Header } from '@features/header';
-import { mailtoHref, revealContact, telHref } from '@shared/lib/contact';
+import { Hero } from '@features/hero';
 import { ButtonLink } from '@shared/ui/Button';
 import { Card } from '@shared/ui/Card';
 import { DataList, DataRow } from '@shared/ui/DataList';
@@ -32,47 +31,7 @@ export function App() {
           without adding a tab stop, so focus genuinely lands here rather than the
           browser only scrolling. */}
       <main id="main" tabIndex={-1}>
-        <Section aria-labelledby="lead-heading" rhythm="major">
-          <Eyebrow>Phase 4 — content layer</Eyebrow>
-          <h1 id="lead-heading" className="text-display mt-3">
-            {profile.name}
-          </h1>
-          <p className="text-ink-muted mt-5 max-w-prose">{profile.headline}</p>
-
-          <DataList className="mt-8 max-w-prose" density="tight">
-            <DataRow label="Role" value={`${profile.title}, ${profile.companyShort}`} />
-            <DataRow label="Based in" value={profile.location} />
-            <DataRow label="Availability" value={profile.availability} />
-            {/* Contact values are decoded in the browser, so they are absent from the
-              served HTML. See shared/lib/contact for the reasoning and its limits. */}
-            <DataRow
-              label="Email"
-              value={
-                <a href={mailtoHref(profile.email)}>{revealContact(profile.email)}</a>
-              }
-            />
-            <DataRow
-              label="Phone"
-              value={
-                <a href={telHref(profile.phone)} className="tabular-nums">
-                  {revealContact(profile.phone)}
-                </a>
-              }
-            />
-          </DataList>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href={profile.links.resume} intent="primary">
-              Download resume
-            </ButtonLink>
-            <ButtonLink href={profile.links.github} target="_blank">
-              GitHub
-            </ButtonLink>
-            <ButtonLink href={profile.links.linkedin} target="_blank" intent="ghost">
-              LinkedIn
-            </ButtonLink>
-          </div>
-        </Section>
+        <Hero />
 
         <Rule weight="strong" />
 
