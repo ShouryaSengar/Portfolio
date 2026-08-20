@@ -2,6 +2,7 @@ import { roles } from '@content/experience';
 import { profile } from '@content/profile';
 import { Eyebrow } from '@shared/ui/Eyebrow';
 import { SchemaInspector } from '@shared/ui/SchemaInspector';
+import { ScrollReveal, ScrollRevealItem } from '@shared/ui/ScrollReveal';
 import { Section } from '@shared/ui/Section';
 
 /**
@@ -30,68 +31,74 @@ export function Experience() {
 
   return (
     <Section id="experience" aria-labelledby="experience-heading" rhythm="major">
-      <Eyebrow>Experience</Eyebrow>
-      <h2 id="experience-heading" className="mt-2 text-2xl">
-        {role.title}
-      </h2>
+      <ScrollReveal stagger>
+        <ScrollRevealItem>
+          <Eyebrow>Experience</Eyebrow>
+          <h2 id="experience-heading" className="mt-2 text-2xl">
+            {role.title}
+          </h2>
 
-      {/* Split across two lines rather than one em-dash-joined run. As a single line it
-          stretched to nearly the full column and read as a URL rather than a heading
-          subtitle. */}
-      <p className="text-ink-muted mt-3 text-base">{role.company}</p>
-      <p className="text-ink-faint text-caption mt-1">
-        {role.location}
-        {' · '}
-        <span className="tabular-nums">{role.start}</span>
-        {' to present'}
-      </p>
+          {/* Split across two lines rather than one em-dash-joined run. As a single line
+              it stretched to nearly the full column and read as a URL rather than a heading
+              subtitle. */}
+          <p className="text-ink-muted mt-3 text-base">{role.company}</p>
+          <p className="text-ink-faint text-caption mt-1">
+            {role.location}
+            {' · '}
+            <span className="tabular-nums">{role.start}</span>
+            {' to present'}
+          </p>
+        </ScrollRevealItem>
 
-      {/*
-        Two columns at the standard shell width, matching the idiom the case studies use.
+        {/*
+          Two columns at the standard shell width, matching the idiom the case studies use.
 
-        The left column deliberately does NOT use DataList. That component right-aligns
-        its value against the label, which is correct for short values and breaks badly
-        for long ones: "Axis Max Life Insurance · Aditya Birla Health Insurance" wrapped
-        into a ragged two-line right-aligned block with the label stranded above it.
-        Stacking label over value keeps everything on one left edge, and long values wrap
-        the way ordinary text does.
+          The left column deliberately does NOT use DataList. That component right-aligns
+          its value against the label, which is correct for short values and breaks badly
+          for long ones: "Axis Max Life Insurance · Aditya Birla Health Insurance" wrapped
+          into a ragged two-line right-aligned block with the label stranded above it.
+          Stacking label over value keeps everything on one left edge, and long values wrap
+          the way ordinary text does.
 
-        Both columns open with an Eyebrow so their first baselines line up.
-      */}
-      <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
-        <div className="space-y-8">
+          Both columns open with an Eyebrow so their first baselines line up.
+        */}
+        <ScrollRevealItem className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+          <div className="space-y-8">
+            <div>
+              <Eyebrow>Clients</Eyebrow>
+              {/* One per line. Joined with a middot they formed a single long string that
+                  was the actual source of the broken wrap. */}
+              <ul className="mt-3 space-y-1.5">
+                {role.clients.map((client) => (
+                  <li key={client} className="text-ink text-sm">
+                    {client}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <Eyebrow>Specialisation</Eyebrow>
+              <p className="text-ink mt-3 text-sm">{profile.specialisation}</p>
+            </div>
+          </div>
+
           <div>
-            <Eyebrow>Clients</Eyebrow>
-            {/* One per line. Joined with a middot they formed a single long string that
-                was the actual source of the broken wrap. */}
-            <ul className="mt-3 space-y-1.5">
-              {role.clients.map((client) => (
-                <li key={client} className="text-ink text-sm">
-                  {client}
+            <Eyebrow>Delivered</Eyebrow>
+            <ul className="mt-3">
+              {role.highlights.map((highlight) => (
+                <li key={highlight} className="border-rule border-t py-4 last:pb-0">
+                  <p className="text-ink-muted max-w-prose text-sm">{highlight}</p>
                 </li>
               ))}
             </ul>
           </div>
+        </ScrollRevealItem>
 
-          <div>
-            <Eyebrow>Specialisation</Eyebrow>
-            <p className="text-ink mt-3 text-sm">{profile.specialisation}</p>
-          </div>
-        </div>
-
-        <div>
-          <Eyebrow>Delivered</Eyebrow>
-          <ul className="mt-3">
-            {role.highlights.map((highlight) => (
-              <li key={highlight} className="border-rule border-t py-4 last:pb-0">
-                <p className="text-ink-muted max-w-prose text-sm">{highlight}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <SchemaInspector data={role} sourcePath="src/content/experience.ts" />
+        <ScrollRevealItem>
+          <SchemaInspector data={role} sourcePath="src/content/experience.ts" />
+        </ScrollRevealItem>
+      </ScrollReveal>
     </Section>
   );
 }

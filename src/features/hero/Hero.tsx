@@ -1,5 +1,8 @@
+import { m, useReducedMotion } from 'motion/react';
+
 import { getAsset } from '@content/assets';
 import { profile } from '@content/profile';
+import { fadeOnly, fadeUp, heroStagger } from '@shared/motion';
 import { ButtonLink } from '@shared/ui/Button';
 import { DataList, DataRow } from '@shared/ui/DataList';
 import { Eyebrow } from '@shared/ui/Eyebrow';
@@ -26,30 +29,41 @@ import { Section } from '@shared/ui/Section';
  */
 export function Hero() {
   const portrait = getAsset('portrait');
+  const prefersReducedMotion = useReducedMotion();
+  const childVariants = prefersReducedMotion ? fadeOnly : fadeUp;
 
   return (
     <Section aria-labelledby="hero-name" rhythm="major">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
-        <div>
+        <m.div initial="hidden" animate="visible" variants={heroStagger}>
           {/* The single most actionable fact for someone scanning for 90 seconds, so
               it gets the accent and the top slot. */}
-          <Eyebrow tone="accent">{profile.availability}</Eyebrow>
+          <m.div variants={childVariants}>
+            <Eyebrow tone="accent">{profile.availability}</Eyebrow>
+          </m.div>
 
-          <h1 id="hero-name" className="text-display mt-4">
+          <m.h1 id="hero-name" className="text-display mt-4" variants={childVariants}>
             {profile.name}
-          </h1>
+          </m.h1>
 
-          <p className="text-ink-muted mt-6 max-w-prose text-lg">{profile.headline}</p>
+          <m.p
+            className="text-ink-muted mt-6 max-w-prose text-lg"
+            variants={childVariants}
+          >
+            {profile.headline}
+          </m.p>
 
           {/* The record. Figures are entries here, not a separate stat grid. */}
-          <DataList className="mt-10 max-w-prose">
-            <DataRow label="Role" value={`${profile.title}, ${profile.companyShort}`} />
-            <DataRow label="Based in" value={profile.location} />
-            <DataRow label="In production" value="3 enterprise applications" numeric />
-            <DataRow label="Daily active users" value="100,000+" numeric />
-          </DataList>
+          <m.div variants={childVariants}>
+            <DataList className="mt-10 max-w-prose">
+              <DataRow label="Role" value={`${profile.title}, ${profile.companyShort}`} />
+              <DataRow label="Based in" value={profile.location} />
+              <DataRow label="In production" value="3 enterprise applications" numeric />
+              <DataRow label="Daily active users" value="100,000+" numeric />
+            </DataList>
+          </m.div>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <m.div className="mt-10 flex flex-wrap gap-3" variants={childVariants}>
             <ButtonLink href={profile.links.resume} intent="primary">
               Download resume
             </ButtonLink>
@@ -59,24 +73,32 @@ export function Hero() {
             <ButtonLink href={profile.links.linkedin} target="_blank" intent="ghost">
               LinkedIn
             </ButtonLink>
-          </div>
+          </m.div>
 
           {/* The signature. This section renders from `profile`, so this shows the
               genuine object rather than an illustration of one. */}
-          <SchemaInspector data={profile} sourcePath="src/content/profile.ts" />
-        </div>
+          <m.div variants={childVariants}>
+            <SchemaInspector data={profile} sourcePath="src/content/profile.ts" />
+          </m.div>
+        </m.div>
 
         {/* Fixed width so the record column keeps a sane measure rather than being
             squeezed by a flexible image. Hidden below lg: on a phone the portrait
             would push the headline and the actions below the fold, and the actions
             are the point of the section. */}
-        <div className="hidden w-[clamp(14rem,22vw,18rem)] lg:block">
+        <m.div
+          className="hidden w-[clamp(14rem,22vw,18rem)] lg:block"
+          initial="hidden"
+          animate="visible"
+          variants={childVariants}
+          transition={{ delay: 0.6 }}
+        >
           <Placeholder
             label={portrait.label}
             ratio={portrait.ratio}
             note={portrait.note}
           />
-        </div>
+        </m.div>
       </div>
     </Section>
   );

@@ -1,6 +1,7 @@
 import { projects } from '@content/projects';
 import { Eyebrow } from '@shared/ui/Eyebrow';
 import { Rule } from '@shared/ui/Rule';
+import { ScrollReveal, ScrollRevealItem } from '@shared/ui/ScrollReveal';
 import { Section } from '@shared/ui/Section';
 
 import { CaseStudy } from './CaseStudy';
@@ -23,30 +24,34 @@ export function Work() {
 
   return (
     <Section id="work" aria-labelledby="work-heading" rhythm="major">
-      <Eyebrow>Selected work</Eyebrow>
-      <h2 id="work-heading" className="mt-2 text-2xl">
-        Three applications in production
-      </h2>
-      <p className="text-ink-muted mt-3 max-w-prose text-sm">
-        Enterprise insurance and fintech, serving 100,000+ daily active users across iOS,
-        Android, and web. Ordered oldest to newest, which is also the order of increasing
-        architectural ownership.
-      </p>
+      <ScrollReveal stagger>
+        <ScrollRevealItem>
+          <Eyebrow>Selected work</Eyebrow>
+          <h2 id="work-heading" className="mt-2 text-2xl">
+            Three applications in production
+          </h2>
+          <p className="text-ink-muted mt-3 max-w-prose text-sm">
+            Enterprise insurance and fintech, serving 100,000+ daily active users across
+            iOS, Android, and web. Ordered oldest to newest, which is also the order of
+            increasing architectural ownership.
+          </p>
+        </ScrollRevealItem>
 
-      {/* Rules between records rather than around cards. A ruled register is the
-          motif of this direction, and it avoids three detached boxes in a row. */}
-      <div className="mt-6">
-        {projects.map((project, index) => (
-          <div key={project.slug}>
-            <Rule />
-            <CaseStudy
-              project={project}
-              index={index}
-              prominence={index === lastIndex ? 'lead' : 'standard'}
-            />
-          </div>
-        ))}
-      </div>
+        {/* Rules between records rather than around cards. A ruled register is the
+            motif of this direction, and it avoids three detached boxes in a row. */}
+        <ScrollRevealItem className="mt-6">
+          {projects.map((project, index) => (
+            <div key={project.slug}>
+              <Rule />
+              <CaseStudy
+                project={project}
+                index={index}
+                prominence={index === lastIndex ? 'lead' : 'standard'}
+              />
+            </div>
+          ))}
+        </ScrollRevealItem>
+      </ScrollReveal>
     </Section>
   );
 }

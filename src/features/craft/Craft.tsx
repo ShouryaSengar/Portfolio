@@ -2,6 +2,7 @@ import { alsoKnown, architecture, stack } from '@content/stack';
 import { Eyebrow } from '@shared/ui/Eyebrow';
 import { Rule } from '@shared/ui/Rule';
 import { SchemaInspector } from '@shared/ui/SchemaInspector';
+import { ScrollReveal, ScrollRevealItem } from '@shared/ui/ScrollReveal';
 import { Section } from '@shared/ui/Section';
 import { TechIcon } from '@shared/ui/TechIcon';
 
@@ -22,54 +23,62 @@ import { TechIcon } from '@shared/ui/TechIcon';
 export function Craft() {
   return (
     <Section id="capabilities" aria-labelledby="capabilities-heading" rhythm="major">
-      <Eyebrow>Capabilities</Eyebrow>
-      <h2 id="capabilities-heading" className="mt-2 text-2xl">
-        What I work with
-      </h2>
+      <ScrollReveal stagger>
+        <ScrollRevealItem>
+          <Eyebrow>Capabilities</Eyebrow>
+          <h2 id="capabilities-heading" className="mt-2 text-2xl">
+            What I work with
+          </h2>
+        </ScrollRevealItem>
 
-      {/* Tier 1 — architecture leads and gets prose, not a chip. */}
-      <div className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-3">
-        {architecture.map((pattern) => (
-          <div key={pattern.name}>
-            <h3 className="text-lg">{pattern.name}</h3>
-            <p className="text-ink-muted mt-2 text-sm">{pattern.note}</p>
-          </div>
-        ))}
-      </div>
+        {/* Tier 1 — architecture leads and gets prose, not a chip. */}
+        <ScrollRevealItem className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-3">
+          {architecture.map((pattern) => (
+            <div key={pattern.name}>
+              <h3 className="text-lg">{pattern.name}</h3>
+              <p className="text-ink-muted mt-2 text-sm">{pattern.note}</p>
+            </div>
+          ))}
+        </ScrollRevealItem>
 
-      <Rule spacing="loose" />
+        <ScrollRevealItem>
+          <Rule spacing="loose" />
 
-      {/* Tier 2 — a ruled cell grid. Borders on the container plus one edge per cell
-          give continuous ruling rather than detached chips, so it reads as a register
-          instead of a tag cloud. */}
-      <ul className="border-rule grid grid-cols-2 border-t border-l sm:grid-cols-3 lg:grid-cols-4">
-        {stack.map((item) => (
-          <li
-            key={item.name}
-            className="border-rule flex items-center gap-3 border-r border-b px-4 py-3"
-          >
-            {/* Every item in this tier has a mark by definition — that is what
-                distinguishes it from `alsoKnown`. No conditional needed. */}
-            <TechIcon id={item.icon} className="text-ink-faint" />
-            <span className="text-ink text-sm">{item.name}</span>
-          </li>
-        ))}
-      </ul>
+          {/* Tier 2 — a ruled cell grid. Borders on the container plus one edge per cell
+              give continuous ruling rather than detached chips, so it reads as a register
+              instead of a tag cloud. */}
+          <ul className="border-rule grid grid-cols-2 border-t border-l sm:grid-cols-3 lg:grid-cols-4">
+            {stack.map((item) => (
+              <li
+                key={item.name}
+                className="border-rule flex items-center gap-3 border-r border-b px-4 py-3"
+              >
+                {/* Every item in this tier has a mark by definition — that is what
+                    distinguishes it from `alsoKnown`. No conditional needed. */}
+                <TechIcon id={item.icon} className="text-ink-faint" />
+                <span className="text-ink text-sm">{item.name}</span>
+              </li>
+            ))}
+          </ul>
+        </ScrollRevealItem>
 
-      {/* Tier 3 — quiet, text-only. */}
-      <div className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2">
-        <Eyebrow className="mr-1">Also</Eyebrow>
-        {alsoKnown.map((item) => (
-          <span key={item} className="text-ink-muted text-sm">
-            {item}
-          </span>
-        ))}
-      </div>
+        {/* Tier 3 — quiet, text-only. */}
+        <ScrollRevealItem className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2">
+          <Eyebrow className="mr-1">Also</Eyebrow>
+          {alsoKnown.map((item) => (
+            <span key={item} className="text-ink-muted text-sm">
+              {item}
+            </span>
+          ))}
+        </ScrollRevealItem>
 
-      <SchemaInspector
-        data={{ architecture, stack, alsoKnown }}
-        sourcePath="src/content/stack.ts"
-      />
+        <ScrollRevealItem>
+          <SchemaInspector
+            data={{ architecture, stack, alsoKnown }}
+            sourcePath="src/content/stack.ts"
+          />
+        </ScrollRevealItem>
+      </ScrollReveal>
     </Section>
   );
 }

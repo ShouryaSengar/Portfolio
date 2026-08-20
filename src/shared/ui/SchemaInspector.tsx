@@ -1,7 +1,10 @@
 import { useId, useMemo, useState } from 'react';
 
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
+
 import { tokenizeJson, type JsonTokenKind } from '@shared/lib/highlightJson';
 import { cn } from '@shared/lib/cn';
+import { easeOutQuint } from '@shared/motion';
 
 /**
  * THE SIGNATURE ELEMENT of this site (.kiro/steering/design-system.md).
@@ -50,6 +53,7 @@ export interface SchemaInspectorProps {
 export function SchemaInspector({ data, sourcePath, className }: SchemaInspectorProps) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
+  const prefersReducedMotion = useReducedMotion();
 
   /**
    * Serialised lazily and then memoised. Stringifying a large object on every render
@@ -89,28 +93,40 @@ export function SchemaInspector({ data, sourcePath, className }: SchemaInspector
       </button>
 
       {open && tokens !== null ? (
-        <div id={panelId} className="border-rule bg-leaf-sunk rounded-card mt-3 border">
-          <p className="border-rule text-ink-faint text-caption border-b px-4 py-2 font-mono">
-            {sourcePath}
-          </p>
-          {/* Horizontal scroll rather than wrapping: wrapped JSON loses its
-              indentation, which is the only thing making the structure readable.
-              max-h keeps a long object from swallowing the page. */}
-          <pre className="text-caption max-h-80 overflow-auto px-4 py-3 leading-relaxed">
-            <code className="font-mono">
-              {tokens.map((token, index) => (
-                <span
-                  // Tokens have no stable identity and the list is immutable for a
-                  // given object, so the index is a legitimate key here.
-                  key={`${String(index)}-${token.kind}`}
-                  className={TOKEN_CLASS[token.kind]}
-                >
-                  {token.value}
-                </span>
-              ))}
-            </code>
-          </pre>
-        </div>
+        <AnimatePresence>
+          <m.div
+            id={panelId}
+            className="border-rule bg-leaf-sunk rounded-card mt-3 overflow-hidden border"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              duration: prefersReducedMotion ? 0.15 : 0.2,
+              ease: easeOutQuint,
+            }}
+          >
+            <p className="border-rule text-ink-faint text-caption border-b px-4 py-2 font-mono">
+              {sourcePath}
+            </p>
+            {/* Horizontal scroll rather than wrapping: wrapped JSON loses its
+                indentation, which is the only thing making the structure readable.
+                max-h keeps a long object from swallowing the page. */}
+            <pre className="text-caption max-h-80 overflow-auto px-4 py-3 leading-relaxed">
+              <code className="font-mono">
+                {tokens.map((token, index) => (
+                  <span
+                    // Tokens have no stable identity and the list is immutable for a
+                    // given object, so the index is a legitimate key here.
+                    key={`${String(index)}-${token.kind}`}
+                    className={TOKEN_CLASS[token.kind]}
+                  >
+                    {token.value}
+                  </span>
+                ))}
+              </code>
+            </pre>
+          </m.div>
+        </AnimatePresence>
       ) : null}
     </div>
   );
