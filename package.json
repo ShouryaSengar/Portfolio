@@ -23,7 +23,8 @@
     "icons": "node scripts/generate-tech-icons.mjs",
     "assets": "node scripts/verify-assets.mjs",
     "assets:strict": "node scripts/verify-assets.mjs --strict",
-    "icons:verify": "node scripts/verify-icons.mjs"
+    "icons:verify": "node scripts/verify-icons.mjs",
+    "nav": "node scripts/verify-nav.mjs"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",

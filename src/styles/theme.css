@@ -171,6 +171,14 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* The header is sticky at 4rem tall, so an anchor jump would land the section
+     heading underneath it. Declared once here rather than as a utility on every
+     section, since forgetting it on one section is invisible until someone uses the
+     nav. The extra 1rem is breathing room, not alignment. */
+  :where(section[id], footer[id]) {
+    scroll-margin-top: 5rem;
+  }
+
   a {
     color: var(--color-carbon);
   }
