@@ -160,10 +160,33 @@ looking like a phone screenshot stretched onto a desktop.
 
 | Token | Value | Use |
 |---|---|---|
-| `max-w-page` | 90rem / 1440px | outer shell; stops the layout stretching absurdly on 2560px displays |
-| `max-w-content` | 75rem / 1200px | default section width |
-| `max-w-feature` | 60rem / 960px | focused single-column sections |
+| `max-w-content` | 75rem / 1200px | **the shell width for every section.** Header and footer wrappers match it. |
+| `max-w-feature` | 60rem / 960px | inner content blocks only — never a section shell |
+| `max-w-page` | 90rem / 1440px | reserved; currently unused |
 | `max-w-prose` | 65ch (Tailwind built-in) | **paragraphs only** |
+
+### Every section shell is the same width
+
+This is a hard rule, learned the hard way. The experience section was built with the
+narrower `feature` shell, on the reasoning that one role does not need 1200px. It looked
+broken.
+
+The reason is that shells are centred with `mx-auto`, so a narrower shell moves **both**
+edges inward — a 960px section inside a 1200px page starts 120px further right than its
+neighbours. The left edge is the axis a reader tracks down the page, and breaking it
+reads as a mistake, never as a decision.
+
+`Section` therefore offers only `content` and `full`. `feature` and `page` were removed
+from its variants so the error is impossible rather than merely documented.
+
+**To make a section feel narrower, constrain its content, not its shell.** Inner blocks
+are left-aligned within the shell, so `max-w-prose` on a paragraph or `max-w-feature` on
+a column keeps the edge intact. This is the layout-width versus reading-measure
+distinction below, and it is the same mistake in a different disguise.
+
+Related: vertical rhythm may legitimately vary between sections — that is what `rhythm`
+is for. Horizontal shell width may not. Experience had drifted on both axes at once,
+which is why it stood out so plainly.
 
 The first three come from `--container-*` tokens in `theme.css`. `max-w-prose` is the one
 exception to "every value lives in theme.css": Tailwind v4 hardcodes it at 65ch and does

@@ -26,7 +26,8 @@
     "icons:verify": "node scripts/verify-icons.mjs",
     "nav": "node scripts/verify-nav.mjs",
     "highlight:verify": "node scripts/verify-highlight.mjs",
-    "contact:verify": "node scripts/verify-contact.mjs"
+    "contact:verify": "node scripts/verify-contact.mjs",
+    "align:verify": "node scripts/verify-alignment.mjs"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",

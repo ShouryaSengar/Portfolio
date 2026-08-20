@@ -16,11 +16,29 @@ const section = cva(
   'mx-auto w-full px-6 md:px-10 lg:px-16',
   {
     variants: {
+      /**
+       * Only two options, deliberately.
+       *
+       * This layout centres every shell with `mx-auto`, so a NARROWER shell shifts both
+       * edges inward — a 960px section inside a 1200px page starts 120px further right
+       * than its neighbours. That breaks the left edge, which is the axis a reader
+       * tracks down the page, and it reads as a mistake rather than a decision.
+       *
+       * `feature` and `page` were offered here and immediately caused exactly that:
+       * the experience section looked misaligned against every other section. Removing
+       * them makes the error impossible instead of merely documented.
+       *
+       * To make a section feel narrower, constrain its CONTENT with a prose measure or a
+       * narrower inner column. Those are left-aligned inside the shell, so the edge stays
+       * put. That is the layout-width versus reading-measure distinction in
+       * .kiro/steering/design-system.md.
+       *
+       * (Utility names are omitted from this comment on purpose — Tailwind scans raw
+       * text, so naming one here would emit it into the stylesheet unused.)
+       */
       width: {
-        page: 'max-w-page', // 1440 — outer shell
-        content: 'max-w-content', // 1200 — default
-        feature: 'max-w-feature', // 960 — focused single column
-        full: 'max-w-none', // opt out; caller owns the width
+        content: 'max-w-content', // 1200 — the shell width for every section
+        full: 'max-w-none', // opt out for genuine full-bleed; caller owns width
       },
       /* Vertical rhythm. Desktop values track the 96–160px section rhythm in
          design-system.md; mobile steps down so sections do not feel stranded. */

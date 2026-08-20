@@ -49,6 +49,15 @@ export function DataList({ className, density, ...props }: DataListProps) {
 
 export interface DataRowProps {
   label: ReactNode;
+  /**
+   * KEEP THIS SHORT. The value is right-aligned against the label, which is the point of
+   * the register motif but degrades badly past roughly 30 characters: it wraps to a
+   * second line, stays right-aligned, and leaves the label stranded above a ragged block.
+   *
+   * The experience section shipped exactly that with a joined list of client names. If a
+   * value is long, or is a list, do not use a DataRow — stack the label over the value and
+   * keep both on the left edge so it wraps like ordinary text.
+   */
   value: ReactNode;
   /**
    * Applies `tabular-nums`. Set this for any value containing digits that vary
