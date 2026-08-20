@@ -1,6 +1,5 @@
 import { m, useReducedMotion } from 'motion/react';
 
-import { getAsset } from '@content/assets';
 import { profile } from '@content/profile';
 import { fadeOnly, fadeUp, heroStagger } from '@shared/motion';
 import { ButtonLink } from '@shared/ui/Button';
@@ -27,85 +26,57 @@ import { Section } from '@shared/ui/Section';
  * unless something anchors it, and here the ruling and the record block do that.
  */
 export function Hero() {
-  const portrait = getAsset('portrait');
   const prefersReducedMotion = useReducedMotion();
   const childVariants = prefersReducedMotion ? fadeOnly : fadeUp;
 
   return (
     <Section aria-labelledby="hero-name" rhythm="major">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
-        <m.div initial="hidden" animate="visible" variants={heroStagger}>
-          {/* The single most actionable fact for someone scanning for 90 seconds, so
-              it gets the accent and the top slot. */}
-          <m.div variants={childVariants}>
-            <Eyebrow tone="accent">{profile.availability}</Eyebrow>
-          </m.div>
-
-          <m.h1 id="hero-name" className="text-display mt-4" variants={childVariants}>
-            {profile.name}
-          </m.h1>
-
-          <m.p
-            className="text-ink-muted mt-6 max-w-prose text-lg"
-            variants={childVariants}
-          >
-            {profile.headline}
-          </m.p>
-
-          {/* The record. Figures are entries here, not a separate stat grid. */}
-          <m.div variants={childVariants}>
-            <DataList className="mt-10 max-w-prose">
-              <DataRow label="Role" value={`${profile.title}, ${profile.companyShort}`} />
-              <DataRow label="Based in" value={profile.location} />
-              <DataRow label="In production" value="3 enterprise applications" numeric />
-              <DataRow label="Daily active users" value="100,000+" numeric />
-            </DataList>
-          </m.div>
-
-          <m.div className="mt-10 flex flex-wrap gap-3" variants={childVariants}>
-            <ButtonLink href={profile.links.resume} intent="primary">
-              Download resume
-            </ButtonLink>
-            <ButtonLink href={profile.links.github} target="_blank">
-              GitHub
-            </ButtonLink>
-            <ButtonLink href={profile.links.linkedin} target="_blank" intent="ghost">
-              LinkedIn
-            </ButtonLink>
-          </m.div>
-
-          {/* The signature. This section renders from `profile`, so this shows the
-              genuine object rather than an illustration of one. */}
-          <m.div variants={childVariants}>
-            <SchemaInspector data={profile} sourcePath="src/content/profile.ts" />
-          </m.div>
+      <m.div initial="hidden" animate="visible" variants={heroStagger}>
+        {/* The single most actionable fact for someone scanning for 90 seconds, so
+            it gets the accent and the top slot. */}
+        <m.div variants={childVariants}>
+          <Eyebrow tone="accent">{profile.availability}</Eyebrow>
         </m.div>
 
-        {/* Fixed width so the record column keeps a sane measure rather than being
-            squeezed by a flexible image. Hidden below lg: on a phone the portrait
-            would push the headline and the actions below the fold, and the actions
-            are the point of the section. */}
-        <m.div
-          className="hidden w-[clamp(14rem,22vw,18rem)] lg:block"
-          initial="hidden"
-          animate="visible"
+        <m.h1 id="hero-name" className="text-display mt-4" variants={childVariants}>
+          {profile.name}
+        </m.h1>
+
+        <m.p
+          className="text-ink-muted mt-6 max-w-prose text-lg"
           variants={childVariants}
-          transition={{ delay: 0.6 }}
         >
-          <div className="relative overflow-hidden rounded-card">
-            {/* Bottom accent strip */}
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-[#b4321e]" />
-            <img
-              src="/Hero-image.png"
-              alt={`Portrait of ${profile.name}`}
-              className="relative w-full object-cover"
-              style={{ aspectRatio: String(portrait.ratio) }}
-              loading="eager"
-              decoding="async"
-            />
-          </div>
+          {profile.headline}
+        </m.p>
+
+        {/* The record. Figures are entries here, not a separate stat grid. */}
+        <m.div variants={childVariants}>
+          <DataList className="mt-10 max-w-prose">
+            <DataRow label="Role" value={`${profile.title}, ${profile.companyShort}`} />
+            <DataRow label="Based in" value={profile.location} />
+            <DataRow label="In production" value="3 enterprise applications" numeric />
+            <DataRow label="Daily active users" value="100,000+" numeric />
+          </DataList>
         </m.div>
-      </div>
+
+        <m.div className="mt-10 flex flex-wrap gap-3" variants={childVariants}>
+          <ButtonLink href={profile.links.resume} intent="primary">
+            Download resume
+          </ButtonLink>
+          <ButtonLink href={profile.links.github} target="_blank">
+            GitHub
+          </ButtonLink>
+          <ButtonLink href={profile.links.linkedin} target="_blank" intent="ghost">
+            LinkedIn
+          </ButtonLink>
+        </m.div>
+
+        {/* The signature. This section renders from `profile`, so this shows the
+            genuine object rather than an illustration of one. */}
+        <m.div variants={childVariants}>
+          <SchemaInspector data={profile} sourcePath="src/content/profile.ts" />
+        </m.div>
+      </m.div>
     </Section>
   );
 }
