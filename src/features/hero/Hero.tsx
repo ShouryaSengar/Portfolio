@@ -96,7 +96,7 @@ export function Hero() {
             {/* Bottom accent strip */}
             <div className="absolute inset-x-0 bottom-0 h-16 bg-[#b4321e]" />
             <img
-              src="/Profile.png"
+              src="/Hero-image.png"
               alt={`Portrait of ${profile.name}`}
               className="relative w-full object-cover"
               style={{ aspectRatio: String(portrait.ratio) }}

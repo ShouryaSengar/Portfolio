@@ -36,7 +36,7 @@ export const assets = [
     label: 'Portrait',
     status: 'final',
     ratio: 4 / 5,
-    src: '/Profile.png',
+    src: '/Hero-image.png',
     note: 'Background-free portrait on ledger canvas with accent strip.',
     owner: 'shourya',
   },
