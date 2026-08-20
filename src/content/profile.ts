@@ -90,4 +90,8 @@ export const profile = {
       detail: 'Certificate of completion, Coding Ninjas.',
     },
   ],
-} satisfies Profile;
+  /* `as const satisfies`, not bare `satisfies`. On its own, `satisfies` checks the
+     shape but lets string properties widen to `string`, which silently defeats any
+     type later derived from this data. Same fix as projects.ts, applied here for
+     consistency rather than because a union depends on it today. */
+} as const satisfies Profile;
