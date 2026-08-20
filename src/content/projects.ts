@@ -36,8 +36,7 @@ export const projects = [
         ],
       },
       {
-        summary:
-          'Built in-app chat assistance with real-time FAQ and guided flows.',
+        summary: 'Built in-app chat assistance with real-time FAQ and guided flows.',
         outcomes: [
           { value: '500+', label: 'queries automated per week' },
           { value: '35%', label: 'fewer support tickets' },
@@ -50,16 +49,19 @@ export const projects = [
         kind: 'web',
         url: 'https://abhioneapp.adityabirlahealth.com/',
         label: 'Visit site',
+        gated: false,
       },
       {
         kind: 'android',
         url: 'https://play.google.com/store/apps/details?id=com.abhione.adityabirlacapital',
         label: 'Google Play',
+        gated: false,
       },
       {
         kind: 'ios',
         url: 'https://apps.apple.com/in/app/abhi-one/id6744645659',
         label: 'App Store',
+        gated: false,
       },
     ],
   },
@@ -109,11 +111,13 @@ export const projects = [
         kind: 'android',
         url: 'https://play.google.com/store/apps/details?id=com.mli.mspace',
         label: 'Google Play',
+        gated: false,
       },
       {
         kind: 'ios',
         url: 'https://apps.apple.com/in/app/mspace/id6502915736',
         label: 'App Store',
+        gated: false,
       },
     ],
   },

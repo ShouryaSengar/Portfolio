@@ -110,8 +110,14 @@ export interface ProjectLink {
   /**
    * True when the URL lands on a sign-in wall. The UI must label these, so a
    * visitor is not sent to what looks like a broken link.
+   *
+   * Required, not optional, and set explicitly on every link. An optional boolean
+   * has three states — true, false, and absent — where only two are meaningful.
+   * Worse, under `as const` the links that omitted it had no such key, so the
+   * union of link types did not carry the property and consumers could not read it
+   * at all. Always present, always a boolean.
    */
-  readonly gated?: boolean;
+  readonly gated: boolean;
 }
 
 export interface Project {
