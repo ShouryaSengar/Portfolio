@@ -1,5 +1,7 @@
+import { Contact } from '@features/contact';
 import { Craft } from '@features/craft';
 import { Experience } from '@features/experience';
+import { Footer } from '@features/footer';
 import { Header } from '@features/header';
 import { Hero } from '@features/hero';
 import { Work } from '@features/work';
@@ -40,7 +42,13 @@ export function App() {
         <Rule />
 
         <Experience />
+
+        <Rule />
+
+        <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }

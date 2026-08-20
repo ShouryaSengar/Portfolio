@@ -13,15 +13,16 @@ export interface NavItem {
 }
 
 /**
- * An entry is added here only once the section it points at exists. A nav link to a
- * section that has not been built yet is a dead anchor, and a dead anchor is invisible
- * until someone clicks it — `scripts/verify-nav.mjs` fails the check to keep that
- * honest. Contact joins this list in Chunk F, when its section lands.
+ * An entry belongs here only once the section it points at exists. A nav link to an
+ * unbuilt section is a dead anchor, and a dead anchor is invisible until someone clicks
+ * it — `scripts/verify-nav.mjs` fails the check to keep that honest. Contact was held
+ * out until its section landed, which is why the check passed at every commit.
  */
 export const navItems = [
   { id: 'work', label: 'Work' },
   { id: 'capabilities', label: 'Capabilities' },
   { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
 ] as const satisfies readonly NavItem[];
 
 /** Only ids that actually exist in the nav. A typo fails compilation. */
