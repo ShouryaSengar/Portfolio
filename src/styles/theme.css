@@ -56,9 +56,18 @@
   --color-rule: color-mix(in oklab, #a8b5a8 45%, transparent);
   --color-rule-strong: color-mix(in oklab, #a8b5a8 75%, transparent);
 
-  --color-ink: #14171a; /* primary — AAA on ledger */
-  --color-ink-muted: #4a5157; /* supporting — AA on ledger */
-  --color-ink-faint: #6e767c; /* metadata — large text only */
+  /* Four ink levels. Values are MEASURED, not eyeballed — every one clears
+     WCAG AA (4.5:1) for normal text on all three surfaces, so any of them is
+     safe at caption size. See design-system.md for the full ratio table.
+
+     ink-faint was originally #6E767C, which measured 3.77:1 on ledger and
+     therefore failed AA at the 11px caption size it was designed for.
+     ink-muted was darkened alongside it to keep the tiers perceptually
+     distinct (L* gaps of 21.8 and 11.1). Do not lighten either without
+     re-measuring. */
+  --color-ink: #14171a; /* primary      — 14.68:1 on ledger, AAA */
+  --color-ink-muted: #3f464c; /* supporting   —  7.82:1 on ledger, AAA */
+  --color-ink-faint: #5a6065; /* metadata     —  5.20:1 on ledger, AA  */
 
   --color-stamp: #b4321e; /* THE accent */
   --color-carbon: #2b3a67; /* links, focus */

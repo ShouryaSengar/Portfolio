@@ -48,8 +48,8 @@ site is for — that is the test in `.kiro/skills/tailwind-design-system`.
 | `--color-rule` | `oklch(from #A8B5A8 l c h / 0.45)` | the ruling grid, dividers |
 | `--color-rule-strong` | `oklch(from #A8B5A8 l c h / 0.75)` | emphasis boundaries |
 | `--color-ink` | `#14171A` | primary text |
-| `--color-ink-muted` | `#4A5157` | supporting copy, labels |
-| `--color-ink-faint` | `#6E767C` | metadata, captions |
+| `--color-ink-muted` | `#3F464C` | supporting copy, labels |
+| `--color-ink-faint` | `#5A6065` | metadata, captions |
 | `--color-stamp` | `#B4321E` | THE accent — one only |
 | `--color-carbon` | `#2B3A67` | links, interactive affordances |
 
@@ -63,16 +63,38 @@ Rules that hold this together:
 - **No gradients.** Not on text, not on backgrounds, not on borders.
 - **Four ink levels**, as tabled above. Two is too flat.
 
-Contrast, verified against `--color-ledger` `#E6E9E3`:
+### Contrast — measured, not estimated
 
-- `--color-ink` `#14171A` — passes AA and AAA for body text
-- `--color-ink-muted` `#4A5157` — passes AA for body text
-- `--color-ink-faint` `#6E767C` — **large text and non-essential metadata only.** Do not use
-  for body copy. Re-measure if the canvas value ever changes.
-- `--color-stamp` and `--color-carbon` — verify per use; both are dark enough for text on
-  ledger, but check any use on `--color-leaf-sunk`.
+Computed with the WCAG 2.x relative-luminance formula during Phase 3. **Every text token
+clears AA (4.5:1) for normal text on every surface it can appear on**, so any of them is safe
+at caption size.
 
-These need re-measuring with a contrast tool during Phase 5, not assumed.
+| Foreground | on `ledger` | on `leaf` | on `leaf-sunk` |
+|---|---|---|---|
+| `ink` | 14.68 AAA | 16.25 AAA | 13.58 AAA |
+| `ink-muted` | 7.82 AAA | 8.66 AAA | 7.23 AAA |
+| `ink-faint` | 5.20 AA | 5.75 AA | 4.81 AA |
+| `stamp` | 5.01 AA | 5.55 AA | 4.63 AA |
+| `carbon` | 9.00 AAA | 9.97 AAA | 8.32 AAA |
+
+Button-specific: `leaf` on `stamp` (primary button label) measures **5.55 AA**. `leaf` on
+`ink` (primary hover) measures **16.25 AAA**.
+
+**Why these values changed.** The first draft used `ink-muted #4A5157` and
+`ink-faint #6E767C`. `ink-faint` measured only 3.77:1 on ledger — it passed AA-large but
+failed AA for normal text, and it was being used at 11px caption size. That would have
+shipped unreadable metadata. Darkening it to `#5A6065` fixed the ratio but closed the gap to
+`ink-muted` to just 6.4 L\*, which is too subtle to read as a separate tier, so `ink-muted`
+was darkened to `#3F464C` in the same pass. Resulting perceptual gaps are 21.8 L\*
+(ink → muted) and 11.1 L\* (muted → faint).
+
+**Do not lighten any ink token without re-measuring against all three surfaces.** The
+temptation to make metadata "quieter" by lightening it is exactly how this defect appeared.
+Use size and weight to de-emphasise instead — that is the guidance in
+`.kiro/skills/tailwind-design-system` and it costs no contrast.
+
+Re-measure the whole table if `--color-ledger`, `--color-leaf`, or `--color-leaf-sunk` ever
+changes.
 
 ## Typography
 
